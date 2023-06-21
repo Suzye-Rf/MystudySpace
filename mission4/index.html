@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
 	<title>MySort Animation</title>
@@ -9,11 +9,7 @@
 </head>
 <body>
 	<h1>排序动画</h1>
-	<label>
-		<input type="button" value="开始动画" id="start-btn">
-	</label>
 	<div class="anime1">
-		<h2>排序动画 1</h2>
 		<span>
 			<span>请输入排序数个数：</span>
 			<label>
@@ -21,6 +17,12 @@
 				<input type="button" value="提交" id="sub-btn">
 			</label>
 		</span>
+		<br>
+		<label>
+			<input type="button" value="ChooseSort" id="choose-btn" class="button">
+			<input type="button" value="BubbleSort" id="bubble-btn" class="button">
+			<input type="button" value="InsertSort" id="Ins-btn" class="button">
+		</label>
 		<div class="boxes" id="b1"></div>
 	</div>
 	<div class="anime2">

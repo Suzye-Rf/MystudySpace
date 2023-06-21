@@ -4,11 +4,11 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: flex-end;
-    background: #0f5132;
+    /*background: #0f5132;*/
     border: #1a1d20 solid 1px;
     width: fit-content;
     min-width: 600px;
-    height: 300px;
+    height: 500px;
     margin: 10px;
 }
 .case {
@@ -16,4 +16,8 @@
     flex-grow: 1;
     background: #0dcaf0;
     margin: 2px;
+    animation-fill-mode: forwards;
+}
+.button{
+    margin: 20px 0;
 }
