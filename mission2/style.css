@@ -1,0 +1,130 @@
+.icons{
+    width: 25px;
+    margin: 15px;
+}
+body{
+    overflow: hidden;
+}
+.main{
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 700px;
+    width: 100%;
+    max-width: 550px;
+    margin-top: 75px;
+    
+}
+h4{
+    font-family: Arial, Helvetica, sans-serif;
+    font: bolder;
+    font-size: 25px;
+    margin: 0;
+    margin-top: 3px;
+    color: rgb(54, 54, 54);
+}
+.subject{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    width: 100%;
+    max-width: 530px;
+    height: 100%;
+    min-height: 800px;
+    /* margin-top: 75px; */
+    /* background-color: rgb(54, 183, 153); */
+}
+.row{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    width: 46.3%;
+    margin: 0 8px 5px 3px;
+}
+.Left{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+}
+.Title{
+    margin: 10px;
+}
+.upper-box{
+    border-bottom: 1px;
+    border-color: black;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    
+    position: fixed;
+    width: 100%;
+    max-width: 550px;
+    left: 0;
+    top: 0;
+    background-color: rgb(254, 254, 254);
+    justify-content:space-between;
+}
+.upper-sec-box{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    background-color: gray;
+    margin: 0;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    max-width: 550px;
+    position: fixed;
+}
+h6{
+    margin: 4px 10px;
+    color: white;
+}
+p{
+    margin: 2px 10px;
+    color: white;
+    font-size: smaller;
+}
+.lower-box{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    background-color: rgb(254, 254, 254);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 550px;
+}
+.Cbox{
+    border: 3px rgb(176, 176, 176) solid;
+    margin: 5px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.comment{
+    height: 80px;
+    background-color: azure;
+    border-top: 2px gray solid;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.inner{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 100%;
+}
+.small-icons{
+    width: 10px;
+}
