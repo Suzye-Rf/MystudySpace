@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>HTML&CSS_Mission 2.5 p1</title>
+</head>
+<body>
+    <div class="main">
+        <span class="left-side">
+            <div class="upper">
+                <!-- img .logo-->
+                <img src="./img/创可贴.png" alt="logo" class="logo" id="mainlogo">
+                <div class="options">
+                    <span class="blocks">
+                        <!-- icon -->
+                        <img src="./img/人员图标.png" alt="icon" class="icon" id="patient-icon">
+                        <span class="opt-text">Patients</span>
+                    </span>
+                    <span class="blocks" id="data">
+                        <!-- icon -->
+                        <img src="./img/数据(白色).png" alt="icon" class="icon" id="data-icon">
+                        <span class="opt-text">Overview</span>
+                    </span>
+                    <span class="blocks">
+                        <!-- icon -->
+                        <img src="./img/今日任务.png" alt="icon" class="icon" id="hist-icon">
+                        <span class="opt-text">Histories</span>
+                    </span>
+                    <span class="blocks">
+                        <!-- icon -->
+                        <img src="./img/时钟 实心.png" alt="icon" class="icon" id="appo-icon">
+                        <span class="opt-text">Appoinments</span>
+                    </span>
+                    <span class="blocks">
+                        <!-- icon -->
+                        <img src="./img/齿轮.png" alt="icon" class="icon" id="sett-icon">
+                        <span class="opt-text">Setting</span>
+                    </span>
+                    
+                </div>
+            </div>
+            <!-- img .logo-->
+            <div class="tele">
+                <img src="./img/电话.png" alt="logo" class="logo" id="tele-logo">
+            </div>
+        </span>
+        <span class="content">
+            <div class="row1">
+                <span class="search">
+                    <!-- text -->
+                    <span class="input">Search something....</span>
+                    <!-- img .icon-->
+                    <img src="./img/查找.png" alt="find" class="icon" id="search-icon">
+                </span>
+                <span class="add"><strong>+ Add patient</strong></span>
+            </div>
+            <div class="row2">
+                <span class="welcome">
+                    <span class="txtcont">
+                        <div id="hi"><strong>Hi,Jennifer!</strong></div>
+                        <div id="sentence"> You've been doing your whole work plan for the last two months.Way to go. <img src="./img/点赞.png" alt="like" id="like"></div>    
+                    </span>
+                </span>
+                <span class="data1">
+                    <span class="new-reviews">
+                        <div class="number1"><strong>+11</strong></div>
+                        <div class="st1">reviews</div>
+                        <div class="line"><img src="./img/3.png" alt="3" id="im"></div>
+                    </span>
+                    <span class="new-patients">
+                        <div class="number2"><strong>+78</strong></div>
+                        <div class="st2">patients</div>
+                        <div class="line"><img src="./img/4.png" alt="4" id="im"></div>
+                    </span>
+                </span>
+            </div>
+            <div class="analytic"><strong>Patient analytics</strong></div>
+            <div class="row3">
+                <span class="analy-box" id="box1">
+                    <span class="shitimg"><img src="./img/心率.png" alt="icon" id="shiticon"></span>
+                    <span class="shit">
+                        <div class="anal-title">Appoinments today</div>
+                        <div class="anal-line">15 patients</div>
+                    </span>
+                </span>
+                <span class="analy-box" id="box2">
+                    <span class="shitimg"><img src="./img/人员.png" alt="icon" id="shiticon"></span>
+                    <span class="shit">
+                        <div class="anal-title">New patients</div>
+                        <div class="anal-line">125 for the month</div>
+                    </span>
+                </span>
+                <span class="analy-box" id="box3">
+                    <span class="shitimg"><img src="./img/任务清单.png" alt="icon" id="shiticon"></span>
+                    <span class="shit">
+                        <div class="anal-title">Total patients</div>
+                        <div class="anal-line">2000+</div>
+                    </span>
+                </span>
+            </div>
+            <div class="row4">
+                <span class="chart1">
+                    <span class="top1">
+                        <span class="chart-title"><strong>This week's analytics overview</strong></span>
+                        <span class="fucked-icons">
+                            <span class="fucked-icon"><img src="./img/条形图.png" alt="icon" class="fucking-icon"></span>
+                            <span class="fucked-icon"><img src="./img/线条.png" alt="icon" class="fucking-icon"></span>
+                        </span>
+                    </span>
+                    <span class="inchart">
+                        <span class="y-nums">
+                            <span>25</span>
+                            <span>20</span>
+                            <span>15</span>
+                            <span>10</span>
+                            <span>5</span>
+                            <span id="num6">0</span>
+                        </span>
+                        <img src="./img/2.png" alt="chart" class="fucking-chart1">
+                    </span>
+                    <div class="x-nums">
+                        <span id="x1">Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thr</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+                    </div>
+                </span>
+                <span class="chart2">
+                    <span class="top2">
+                        <span class="chart-title"><strong>Progress</strong></span>
+                        <img src="img/刷新.png" alt="icon" class="fucking-icon">
+                    </span>
+                    <img src="./img/1.png" alt="chart" class="fucking-chart2">
+                    <div class="classify">
+                        <ul>
+                            <li id="ul1"><p>Health</p></li>
+                            <li id="ul2"><p>Continue treatment</p></li>
+                            <li id="ul3"><p>Neutral</p></li>
+                        </ul>
+                    </div>
+                </span>
+            </div>
+        </span>
+        <span class="right-side">
+            <div class="top-ctrl">
+                <span class="close-btn"><img src="./img/close.png" alt="close" class="icon" id="close"></span>
+                <span class="more-btn"><img src="./img/more.png" alt="more" class="icon" id="more"></span>
+            </div>
+            <div class="Sculpture"><img src="./img/头像.png" alt="Sculpture" class="sculpture"></div>
+            <div class="name"><strong>Jennifer Turner</strong></div>
+            <div class="profession" id="profession"><strong>Cardiologist</strong></div>
+            <div class="event">
+                <span class="next"><strong>Next event</strong></span>
+                <span class="nadd"><strong>+ Add</strong></span>
+            </div>
+            <div class="todo">
+                <img src="./img/相机.png" alt="camera" class="cam">
+                <span class="event-txt">
+                    <span class="line">Medical Conference</span>
+                    <span class="line">May 5 - 11:00 AM</span>
+                    <span class="line" id="line3">USA Houston</span>
+                </span>
+            </div>
+            <div class="next-note"><strong>Next notifications</strong></div>
+            <div class="message">
+                <span class="close-2"><img src="./img/close2.png" alt="close" class="close2"></span>
+                <span class="msg">The patient will come to you in 5 minutes.</span>
+            </div>
+        </span>
+    </div>
+</body>html
+</html>

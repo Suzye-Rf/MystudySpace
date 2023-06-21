@@ -1,0 +1,19 @@
+.boxes{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: #0f5132;
+    border: #1a1d20 solid 1px;
+    width: fit-content;
+    min-width: 600px;
+    height: 300px;
+    margin: 10px;
+}
+.case {
+    padding: 10px 10px;
+    flex-grow: 1;
+    background: #0dcaf0;
+    margin: 2px;
+}

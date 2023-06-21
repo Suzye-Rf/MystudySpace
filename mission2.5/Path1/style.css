@@ -1,0 +1,432 @@
+body{
+    background: url("./img/背景图_画板 1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.main{
+    display: flex;
+    display: -webkit-flex;
+    flex-grow: 1;
+    align-content: stretch;
+    margin: 50px;
+    background-color: #ffffff;
+    border-radius:25px;
+    min-height: 750px;
+    height: fit-content;
+    min-width: fit-content;
+}
+.left-side{
+    
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+.upper{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    margin: 10px;
+}
+.logo{
+    width: 70px; 
+}
+.icon{
+    width: 30px;
+}
+#mainlogo{
+    margin-left: 15px;
+    margin-top: 40px;
+}
+
+.opt-text{
+    margin:5px 15px;
+}
+
+.blocks{  
+    margin: 25px 10px;
+    /* margin-top: 20px; */
+    padding: 5px 0px;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+}
+.icon{
+    margin-left: 5px;
+}
+#data{
+    background-color: rgb(65, 191, 205);
+    width: fit-content;
+    border-radius: 10px;
+}
+#tele-logo{
+    width: 50px;
+    margin: 20px;
+    margin-bottom: 35px;
+}
+.content{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    flex-grow: 5;
+    background-color: rgb(245, 245, 245);
+    margin: 25px 0px;
+}
+.row1{
+    margin: 35px;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.search{
+    display: flex;
+    display: -webkit-flex;
+    width: 350px;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 15px;
+}
+#search-icon{
+    size: 25px;
+    margin:10px;
+}
+.input{
+    padding:15px 20px;
+    color: rgb(223, 235, 235);
+}
+.add{
+    border:1.5px solid rgb(65, 191, 205) ;
+    border-radius: 15px;
+    padding:15px 30px;
+    color: rgb(65, 191, 205);
+}
+.row2{
+    margin: 0px 35px;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.welcome{
+    width: 350px;
+    height: 122.6px;
+    background: url(./img/药.png);
+    background-size: cover;
+}
+
+.txtcont{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    width: 250px;
+    height: 75px;
+    margin: 20px;
+}
+#hi{
+    font-size: larger;
+    color: #ffffff;
+}
+#sentence{
+    font-size: 10px;
+    color: #ffffff;
+}
+#like{
+    width: 15px;
+}
+.data1{
+    width: 45%;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    margin: 0 30px;
+}
+.new-reviews,.new-patients{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    background-color: #ffffff;
+    margin: 0 25px;
+    border-radius: 15px;
+    width: 110px;
+}
+
+.number1{
+    margin: 15px 5px;
+    font-size: 30px;
+    color: rgb(253,134,127);
+    margin-bottom: 0px;
+}
+.st1{
+    margin: 0px 15px;
+    font-size: 10px;
+    color: rgb(253,134,127);
+    margin-bottom: 20px;
+}
+.number2{
+    margin: 15px 5px;
+    font-size: 30px;
+    color: rgb(105,201,215);
+    margin-bottom: 0px;
+}
+.st2{
+    margin: 0px 15px;
+    font-size: 10px;
+    color: rgb(105,201,215);
+    margin-bottom: 20px;
+}
+#im{
+    width: 110px;
+}
+.row3{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 0 15px;
+}
+.analytic{
+    font-size: larger;
+    margin: 5px 35px;
+}
+#shiticon{
+    width: 40px;
+    margin: 2px 5px;
+}
+.shit{
+    margin: 5px;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+.anal-title{
+    color: #ffffff;
+    font-size: small;
+}
+.anal-line{
+    color: #ffffff;
+    font-size: smaller;
+}
+.analy-box{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    width: 200px;
+    border-radius: 15px;
+    margin: 15px;
+    padding: 8px;
+}
+#box1{
+    background-color: rgb(251,136,133);
+}
+#box2{
+    background-color: rgb(255,181,92);
+}
+#box3{
+   background-color: rgb(105,201,215);
+}
+.row4{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    margin: 15px 30px;
+    justify-content: space-between;
+}
+.chart1{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding:15px;
+    width: fit-content;
+}
+.top1{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 400px;
+}
+.chart-title{
+    margin: 0 5px 0 0;
+}
+.fucking-icon{
+    width: 25px;
+}
+.y-nums{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    color: rgb(208, 208, 208);
+    font-size: small;
+}
+.y-nums span{
+    margin-bottom: 10px;
+}
+.y-nums #num6{
+    margin-bottom: 0;
+}
+.x-nums{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    color: rgb(208, 208, 208);
+    font-size: small;
+}
+.x-nums span{
+    margin-left: 30px;
+}
+#x1{
+    margin-left: 40px;
+}
+.inchart{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+}
+.fucking-chart1{
+    margin: 8px;
+    width: 360px;
+    height: 180px;
+}
+.top2{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.chart2{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    width: 250px;
+    margin: 5px 15px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+}
+.fucking-chart2{
+    width: 80px;
+    margin: 10px 28% 0 30%;
+}
+.classify #ul1{
+    color: rgb(105,201,215);
+}
+.classify #ul1 p{
+    color: black;
+}
+.classify #ul2{
+    color: rgb(253,134,127);
+}
+.classify #ul2 p{
+    color: black;
+}
+.classify #ul3{
+    color: rgb(255,181,92);
+}
+.classify #ul3 p{
+    color: black;
+}
+.right-side{
+    width: 20%;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+    justify-content: flex-start;
+    padding: 10px;
+}
+.top-ctrl{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 94%;
+    margin-top: 100px;
+}
+.Sculpture,.name,.profession{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin: 10px;
+}
+.sculpture{
+    width: 150px;
+}
+#profession{
+    font-size: small;
+    color: rgb(208, 208, 208);
+}
+.event{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.nadd{
+    color: rgb(105,201,215);
+}
+.todo{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    padding:5px;
+    margin: 45px 10px;
+    border-radius: 15px;
+    /* -webkit-box-shadow: #666 0px 0px 10px; */
+    /* -moz-box-shadow: #666 0px 0px 10px; */
+    box-shadow: #eeeeee 5px 5px 10px 10px ;
+    
+   
+}
+.event span{
+    margin: 0 10px;
+}
+.todo img,span{
+    margin:5px;
+}
+.cam{
+    width: 35px;
+}
+.event-txt{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+.line{
+    font-size: small;
+}
+#line3{
+    color: rgb(208, 208, 208);
+}
+
+.msg{
+    margin: 15px 10px;
+    color: #ffffff;
+}
+.message{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 15px;
+    background-color: rgb(105,201,215);
+    border-radius: 15px;
+}
+.close2{
+    width: 30px;
+    justify-self: flex-start;
+}

@@ -1,0 +1,130 @@
+body{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+}
+.main{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: stretch;
+    margin: 100px 150px;
+    min-width: 500px;
+    min-height: 650px;
+    background-color: #f4f4f4;
+    width: 800px;
+}
+.content{
+    flex-grow: 1;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 500px;
+}
+.surface{
+    background-image: url(./img/登录界面.png);
+    background-size: cover;
+    flex-grow: 1;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 500px;
+}
+.logo{
+    width: 50px;
+}
+.title{
+    font-size: larger;
+    color: rgb(21, 21, 21);
+    margin: 15px;
+}
+.login{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+}
+.box{
+    border: 0.5px solid rgb(117, 117, 117);
+    border-radius: 25px;
+    padding:15px;
+    width: 250px;
+}
+.tips{
+    margin:10px;
+    font-size: small;
+}
+
+.txt{
+    color: rgb(117, 117, 117);
+    font-size: small;
+}
+.attention{
+    font-size: 10px;
+    color: rgb(184, 184, 184);
+    margin:10px 15px;
+    margin-top: 20px;
+}
+.button{
+    background-image: url(./img/登录条.png);
+    background-size: cover;
+    width: 180px;
+    padding: 21px;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.button span{
+    font-size: smaller;
+    color: #f4f4f4;
+}
+.create{
+    background: linear-gradient(to right,#ffd091,#fc77cb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    border: 1px solid #fc77cb;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+}
+.Problem{
+    margin: 15px;
+}
+.bitch{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
+    margin-top: 50px;
+}
+.fuck{
+    font-size: 200px;
+    color: rgb(254, 254, 254,0.2);
+    font-family: Arial, Helvetica, sans-serif;
+    height: 44%;
+}
+.slogan{
+    color: #f4f4f4;
+    font-size: 30px;
+    margin-left: 10px;
+    font-family:cursive;
+    width: 80%;
+}
+.para{
+    width: 80%;
+    margin-left: 10px;
+    color: #f4f4f4;
+}
