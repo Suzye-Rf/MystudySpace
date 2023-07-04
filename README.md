@@ -2,7 +2,7 @@
 Anything in my study process
 
 
-##My work Summary on The First Week of Summer vacation 暑假第一周
+## My work Summary on The First Week of Summer vacation 暑假第一周
    学习进度：
          1、 JavaScript深度——同步和异步编程思想；
          2、 TypeScript初步——深度，以及了解其与JavaScript的区别
