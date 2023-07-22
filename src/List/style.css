@@ -1,0 +1,14 @@
+.box{
+  margin: 20px 10px;
+  border-radius: 5px !important;
+}
+.box1{
+  margin: 20px 10px;
+  min-width: 400px;
+  border-radius: 5px !important;
+}
+.inbox{
+  display: flex !important;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
