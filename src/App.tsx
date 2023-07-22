@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Page from './Page'
+import { CurrentDashboardUpdater } from './store/CurrentDashBorad'
+import { ListVisibilityProvider } from './store/ListVisibility'
+import { DashBoardStoreProvider } from './store/MainDashBoradStates'
+import { NewliststatsProvider } from './store/NewListListener'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <DashBoardStoreProvider>
+        <CurrentDashboardUpdater>
+          <ListVisibilityProvider>
+            <NewliststatsProvider>
+              <Page />
+            </NewliststatsProvider>
+          </ListVisibilityProvider>
+        </CurrentDashboardUpdater>
+        {/** 这逼玩意... */}
+      </DashBoardStoreProvider>
+    </>
+  )
 }
 
-export default App;
+export default App
