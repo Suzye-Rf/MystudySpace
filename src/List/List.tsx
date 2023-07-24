@@ -6,7 +6,7 @@ import {
   ShoppingOutlined,
   UpOutlined,
 } from '@ant-design/icons'
-import { Button, Divider, Drawer, Space, Spin, Tooltip } from 'antd'
+import { Button, Divider, Drawer, Modal, Space, Spin, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import './style.css'
 import { useListStore } from '../store/ListStore'
@@ -49,6 +49,7 @@ const List: React.FC<{
   const style = { margin: '5px' }
   const [settingOpen, setSettingOpen] = useState(false) // Set setting to open the drawer
   const [loading, setLoading] = useState(false) // Set loading
+  const [showmodal, setShowModal] = useState(false) // Set modal to show
   const compressbox = () => {
     // Compress the box
     setBoxStyle({
@@ -103,21 +104,28 @@ const List: React.FC<{
     }
   }
   const handleSettings = () => {
-    console.log(props.tag)
     setSettingOpen(true)
   }
   const drawerClose = () => {
     setSettingOpen(false)
   }
 
-  const handleButtonClick = () => {}
+  const handleAddButtonClick = () => {}
+
+  const handleCancel = () => {
+    setShowModal(false)
+  }
+
   const handleDelete = () => {
     setLoading(true)
     setTimeout(() => {
-      liststore.DeleteThing(props.title)
+      setTimeout(() => {
+        setLoading(false)
+        liststore.DeleteThing(props.title)
+      }, 200)
+      setShowModal(false)
       setSettingOpen(false)
-      setLoading(false)
-    }, 300)
+    }, 100)
   }
   return (
     <div>
@@ -144,7 +152,10 @@ const List: React.FC<{
               </span>
               {isVisible && props.plusActivated && (
                 <Button.Group style={style}>
-                  <Button icon={<PlusOutlined />} onClick={handleButtonClick} />
+                  <Button
+                    icon={<PlusOutlined />}
+                    onClick={handleAddButtonClick}
+                  />
                   {props.optionActivated && (
                     <>
                       <Button
@@ -154,9 +165,24 @@ const List: React.FC<{
                       <Drawer
                         title="列表设置"
                         extra={
-                          <Button danger size="small" onClick={handleDelete}>
-                            删除列表
-                          </Button>
+                          <>
+                            <Button
+                              danger
+                              size="small"
+                              onClick={() => setShowModal(true)}>
+                              删除列表
+                            </Button>
+                            <Modal
+                              title="删除列表"
+                              onCancel={handleCancel}
+                              onOk={handleDelete}
+                              open={showmodal}
+                              okButtonProps={{ danger: true }}
+                              okText="删除列表"
+                              cancelText="取消">
+                              您确定要删除此列表吗？
+                            </Modal>
+                          </>
                         }
                         placement="right"
                         open={settingOpen}
