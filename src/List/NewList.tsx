@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Button,
   Popover,
@@ -12,7 +12,6 @@ import { DownOutlined, SearchOutlined } from '@ant-design/icons'
 import { newliststats } from '../store/NewListListener'
 import { content } from '../data/data'
 const { Search } = Input
-
 
 const NewList: React.FC<{ visibility: string }> = (props) => {
   const boxstyle = {
@@ -33,12 +32,13 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   const [filteredmap, setFilteredMap] = useState(content[value - 1].cont)
   const [radiokey, setRadioKey] = useState(1000)
   const style = { margin: 20 }
+  useEffect(() => {
+    setFilteredMap(originalmap)
+  }, originalmap)
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value)
     console.log(e.target.value, value)
     setOriginalMap(content[e.target.value - 1].cont)
-    
-
     setRadioKey(radiokey + 1)
     setDanger(false)
     setDangerNotice('none')
@@ -216,7 +216,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
                   onClick={() => {
                     if (popup) setPopup(false)
                     else setPopup(true)
-                    setFilteredMap(originalmap)
+                    // setFilteredMap(originalmap)
                   }}
                   danger={danger}>
                   <p>{btnvalue}</p> <DownOutlined size={5} />
