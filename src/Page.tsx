@@ -1,8 +1,8 @@
 import { Layout } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Options from './Edit/Options'
-import SwitchBoard from './SwitchBoard'
-import Searching from './Searching'
+import SwitchBoard from './NavBar/SwitchBoard'
+import Searching from './NavBar/Searching'
 import List from './List/List'
 import { useListStore } from './store/ListStore'
 import { Listsvisibility } from './store/ListVisibility'
@@ -56,7 +56,7 @@ const Page: React.FC = () => {
                 }}
                 key={Vi.key}
               />
-              {liststore.lists.map((item)=>{
+              {liststore.lists.map((item) => {
                 return <List {...item} />
               })}
               <List

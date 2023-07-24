@@ -1,8 +1,8 @@
 import { DownOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button, Divider, Input, Modal, Popover } from 'antd'
 import { useState } from 'react'
-import { usedDashBoardStore } from './store/MainDashBoradStates'
-import { currentdashboard } from './store/CurrentDashBorad'
+import { usedDashBoardStore } from '../store/MainDashBoradStates'
+import { currentdashboard } from '../store/CurrentDashBorad'
 // ----------------------------------------------------------------
 const SwitchBoard: React.FC = () => {
   const { DashBoards } = usedDashBoardStore()
