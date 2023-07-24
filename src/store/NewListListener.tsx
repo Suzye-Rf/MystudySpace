@@ -7,7 +7,7 @@ export const [newliststats, NewliststatsProvider] = createStore(() => {
   const [button,setbutton] = useState(false)
   const [notion,setnotion] = useState('')
   const updateNotion = () => {
-    if(notion == '') setnotion('列表创建向导已打开')
+    if(notion === '') setnotion('列表创建向导已打开')
     else setnotion('')
   }
   const updateBtn = () => {

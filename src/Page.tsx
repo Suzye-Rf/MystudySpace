@@ -1,10 +1,10 @@
-import { Button, Layout } from 'antd'
+import { Layout } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Options from './Edit/Options'
 import SwitchBoard from './SwitchBoard'
 import Searching from './Searching'
 import List from './List/List'
-
+import { useListStore } from './store/ListStore'
 import { Listsvisibility } from './store/ListVisibility'
 import NewList from './List/NewList'
 import { newliststats } from './store/NewListListener'
@@ -12,6 +12,7 @@ import { newliststats } from './store/NewListListener'
 const Page: React.FC = () => {
   const Vi = Listsvisibility()
   const newliststat = newliststats()
+  const liststore = useListStore()
   return (
     <>
       <Layout>
@@ -55,7 +56,9 @@ const Page: React.FC = () => {
                 }}
                 key={Vi.key}
               />
-
+              {liststore.lists.map(()=>{
+                return <></>
+              })}
               <List
                 {...{
                   title: 'Closed',

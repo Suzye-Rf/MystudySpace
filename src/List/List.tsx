@@ -8,7 +8,6 @@ import {
 } from '@ant-design/icons'
 import { Button, Tooltip } from 'antd'
 import React, { useState } from 'react'
-import { Listsvisibility } from '../store/ListVisibility'
 import './style.css'
 
 const List: React.FC<{
