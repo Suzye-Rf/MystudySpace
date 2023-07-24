@@ -56,8 +56,8 @@ const Page: React.FC = () => {
                 }}
                 key={Vi.key}
               />
-              {liststore.lists.map(()=>{
-                return <></>
+              {liststore.lists.map((item)=>{
+                return <List {...item} />
               })}
               <List
                 {...{

@@ -11,6 +11,7 @@ import {
 import { DownOutlined, SearchOutlined } from '@ant-design/icons'
 import { newliststats } from '../store/NewListListener'
 import { content } from '../data/data'
+import { useListStore } from '../store/ListStore'
 const { Search } = Input
 
 const NewList: React.FC<{ visibility: string }> = (props) => {
@@ -21,9 +22,11 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
     backgroundColor: '#FBFAFD',
     display: props.visibility,
   }
+  const liststore = useListStore()
   const stats = newliststats()
   const [stylestate, setStyle] = useState(boxstyle)
   const [value, setValue] = useState(1)
+  const [lowerVal, setLowerVal] = useState(1)
   const [btnvalue, setBtnValue] = useState('选择一个标记')
   const [selected, setSelected] = useState(false)
   const [popup, setPopup] = useState(false)
@@ -66,7 +69,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
     setSelected(false)
   }
 
-  const handleCancel = () => {
+  const handleCancelorCommit = () => {
     setStyle({
       // default boxstyle
       width: '400px',
@@ -81,14 +84,27 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   const handleSelectChange = (e: RadioChangeEvent) => {
     setPopup(false)
     setBtnValue(`${content[value - 1].cont[e.target.value - 1].content}`)
+    setLowerVal(e.target.value)
     setDanger(false)
     setDangerNotice('none')
     setSelected(true)
   }
   const [danger, setDanger] = useState(false)
   const [dangerNotice, setDangerNotice] = useState('none')
-
   const [loading, setLoading] = useState(false)
+
+  const commit = (props: {
+    title: string
+    data1: number
+    data2: number
+    plusActivated: boolean
+    optionActivated: boolean
+    Display: string
+  }) => {
+    liststore.AddThing(props)
+
+  }
+
   const handleOk = () => {
     setPopup(false)
     setLoading(true)
@@ -101,7 +117,17 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
         setDanger(false)
         setDangerNotice('none')
         setLoading(false)
+
         //这里写提交的函数，参数为数据数组的value
+        commit({
+          title: content[value - 1].cont[lowerVal - 1].content,
+          data1: 0,
+          data2: 0,
+          plusActivated: true,
+          optionActivated: true,
+          Display: 'block',
+        })
+        handleCancelorCommit()
       }, 300)
     }
   }
@@ -236,7 +262,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
             loading={loading}>
             添加到面板
           </Button>
-          <Button onClick={handleCancel}>取消</Button>
+          <Button onClick={handleCancelorCommit}>取消</Button>
         </div>
       </div>
     </div>
