@@ -8,7 +8,7 @@ import {
   Input,
   Tag,
 } from 'antd'
-import { DownOutlined, SearchOutlined } from '@ant-design/icons'
+import { DownOutlined } from '@ant-design/icons'
 import { newliststats } from '../store/NewListListener'
 import { content } from '../data/data'
 import { useListStore } from '../store/ListStore'
@@ -121,7 +121,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
         //这里写提交的函数，参数为数据数组的value
         commit({
           title: content[value - 1].cont[lowerVal - 1].content,
-          data1: 0,
+          data1: 0,//这两个值需要用全局状态(? )暂时还没想到好方法
           data2: 0,
           plusActivated: true,
           optionActivated: true,

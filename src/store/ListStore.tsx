@@ -22,8 +22,8 @@ export const [useListStore, StoreListProvider] = createStore(()=>{
     setLists([...lists,thing])
     
   }
-  const DeleteThing = (thing:{}) => {
-    setLists(lists.filter((item) => item !== thing))
+  const DeleteThing = (thingTItle:string) => {
+    setLists(lists.filter((item) => item.title !== thingTItle))
     
   }
 

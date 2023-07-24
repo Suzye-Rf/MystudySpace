@@ -6,9 +6,10 @@ import {
   ShoppingOutlined,
   UpOutlined,
 } from '@ant-design/icons'
-import { Button, Tooltip } from 'antd'
+import { Button, Drawer, Spin, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import './style.css'
+import { useListStore } from '../store/ListStore'
 
 const List: React.FC<{
   title: string
@@ -16,14 +17,14 @@ const List: React.FC<{
   data2: number
   plusActivated: boolean
   optionActivated: boolean
-  Display:string
+  Display: string
 }> = (props) => {
   const boxstyle = {
     // default boxstyle
     width: '400px',
     height: '95%',
     backgroundColor: '#ECECEF',
-    display: props.Display
+    display: props.Display,
   }
   const toolstyle = {
     display: 'flex',
@@ -32,7 +33,7 @@ const List: React.FC<{
     alignItems: 'center',
     rotate: '0deg',
   } // default toolstyle
-
+  const liststore = useListStore()
   const [extendState, setExtendedState] = useState(true) // Judge state changes
   const [extended, setExtended] = useState(() => {
     // Set extended state
@@ -44,16 +45,16 @@ const List: React.FC<{
   const [isVisible, setIsVisible] = useState(true) // Set btn visible.
   // The components settings used when the box is expanded.'
   const style = { margin: '5px' }
-
+  const [settingOpen, setSettingOpen] = useState(false) // Set setting to open the drawer
+  const [loading, setLoading] = useState(false) // Set loading
   const compressbox = () => {
     // Compress the box
     setBoxStyle({
       width: '40px',
       height: `${boxStyle.height}`,
       backgroundColor: '#ECECEF',
-      display: props.Display
+      display: props.Display,
     })
-    
   }
   const expandbox = () => {
     // Expand the box
@@ -61,12 +62,11 @@ const List: React.FC<{
       width: '400px',
       height: '95%',
       backgroundColor: '#ECECEF',
-      display: props.Display
+      display: props.Display,
     })
   }
 
   const handleClick = () => {
-    
     // Handle click: Change the state of the box when the user clicks
     if (extendState) {
       setExtended(() => {
@@ -100,39 +100,72 @@ const List: React.FC<{
       })
     }
   }
-  const handleButtonClick = () => {}
+  const handleSettings = () => {
+    setSettingOpen(true)
+  }
+  const drawerClose = () => {
+    setSettingOpen(false)
+  }
 
+  const handleButtonClick = () => {}
+  const handleDelete = () => {
+    setLoading(true)
+    setTimeout(() => {
+      liststore.DeleteThing(props.title)
+      setSettingOpen(false)
+      setLoading(false)
+    }, 300)
+  }
   return (
     <div>
       <div style={boxStyle} className="box">
-        <span className="separator" style={toolStyle}>
-          <span style={{ whiteSpace: 'nowrap', margin: '5px' }}>
-            <Tooltip placement="top" title={pop}>
-              <Button onClick={handleClick} type="text" icon={extended} />
-              {/* I'm just a button*/}
-            </Tooltip>
-            <span>
-              <strong style={{ whiteSpace: 'nowrap' }}>{props.title}</strong>
+        <Spin spinning={loading}>
+          <span className="separator" style={toolStyle}>
+            <span style={{ whiteSpace: 'nowrap', margin: '5px' }}>
+              <Tooltip placement="top" title={pop}>
+                <Button onClick={handleClick} type="text" icon={extended} />
+                {/* I'm just a button*/}
+              </Tooltip>
+              <span>
+                <strong style={{ whiteSpace: 'nowrap' }}>{props.title}</strong>
+              </span>
+            </span>
+            <span className="tool" style={{ whiteSpace: 'nowrap' }}>
+              <span style={{ whiteSpace: 'nowrap' }}>
+                <CopyOutlined style={style} />
+                {props.data1}
+              </span>
+              <span style={{ whiteSpace: 'nowrap', margin: '0 10px 0 0' }}>
+                <ShoppingOutlined style={style} />
+                {props.data2}
+              </span>
+              {isVisible && props.plusActivated && (
+                <Button.Group style={style}>
+                  <Button icon={<PlusOutlined />} onClick={handleButtonClick} />
+                  {props.optionActivated && (
+                    <>
+                      <Button
+                        icon={<SettingOutlined />}
+                        onClick={handleSettings}
+                      />
+                      <Drawer
+                        title="列表设置"
+                        extra={
+                          <Button danger size="small" onClick={handleDelete}>
+                            删除列表
+                          </Button>
+                        }
+                        placement="right"
+                        open={settingOpen}
+                        onClose={drawerClose}></Drawer>
+                    </>
+                  )}
+                </Button.Group>
+              )}
             </span>
           </span>
-          <span className="tool" style={{ whiteSpace: 'nowrap' }}>
-            <span style={{ whiteSpace: 'nowrap' }}>
-              <CopyOutlined style={style} />
-              {props.data1}
-            </span>
-            <span style={{ whiteSpace: 'nowrap', margin: '0 10px 0 0' }}>
-              <ShoppingOutlined style={style} />
-              {props.data2}
-            </span>
-            {isVisible && props.plusActivated && (
-              <Button.Group style={style}>
-                <Button icon={<PlusOutlined />} onClick={handleButtonClick} />
-                {props.optionActivated && <Button icon={<SettingOutlined />} />}
-              </Button.Group>
-            )}
-          </span>
-        </span>
-        <div className="content"></div>
+          <div className="content"></div>
+        </Spin>
       </div>
     </div>
   )
