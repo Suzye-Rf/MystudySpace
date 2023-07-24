@@ -48,6 +48,8 @@ const Page: React.FC = () => {
               <List
                 {...{
                   title: '开放中',
+                  form:'',
+                  tag:<></>,
                   data1: 0,
                   data2: 0,
                   plusActivated: true,
@@ -62,6 +64,8 @@ const Page: React.FC = () => {
               <List
                 {...{
                   title: 'Closed',
+                  form:'',
+                  tag:<></>,
                   data1: 0,
                   data2: 0,
                   plusActivated: false,

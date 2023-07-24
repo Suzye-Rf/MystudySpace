@@ -6,13 +6,15 @@ import {
   ShoppingOutlined,
   UpOutlined,
 } from '@ant-design/icons'
-import { Button, Drawer, Spin, Tooltip } from 'antd'
+import { Button, Drawer, Space, Spin, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import './style.css'
 import { useListStore } from '../store/ListStore'
 
 const List: React.FC<{
   title: string
+  form: string //大选项
+  tag:JSX.Element //小选项
   data1: number
   data2: number
   plusActivated: boolean
@@ -101,6 +103,7 @@ const List: React.FC<{
     }
   }
   const handleSettings = () => {
+    console.log(props.tag)
     setSettingOpen(true)
   }
   const drawerClose = () => {
@@ -157,7 +160,12 @@ const List: React.FC<{
                         }
                         placement="right"
                         open={settingOpen}
-                        onClose={drawerClose}></Drawer>
+                        onClose={drawerClose}>
+                        <Space direction="vertical">
+                          <h3 style={{ margin: 0 }}>{props.form}</h3>
+                          {props.tag}
+                        </Space>
+                      </Drawer>
                     </>
                   )}
                 </Button.Group>

@@ -48,7 +48,6 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
     switch (e.target.value) {
       case 1: {
         setBtnValue('选择一个标记')
-
         break
       }
       case 2: {
@@ -93,16 +92,17 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   const [dangerNotice, setDangerNotice] = useState('none')
   const [loading, setLoading] = useState(false)
 
-  const commit = (props: {
+  const commit = (prop: {
     title: string
+    form: string
+    tag: JSX.Element
     data1: number
     data2: number
     plusActivated: boolean
     optionActivated: boolean
     Display: string
   }) => {
-    liststore.AddThing(props)
-
+    liststore.AddThing(prop)
   }
 
   const handleOk = () => {
@@ -121,7 +121,13 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
         //这里写提交的函数，参数为数据数组的value
         commit({
           title: content[value - 1].cont[lowerVal - 1].content,
-          data1: 0,//这两个值需要用全局状态(? )暂时还没想到好方法
+          form: content[value - 1].main,
+          tag: (
+            <Tag color={content[value - 1].cont[lowerVal - 1].color} style={{color:'gray'}}>
+              {content[value - 1].cont[lowerVal - 1].content}
+            </Tag>
+          ),
+          data1: 0, //这两个值需要用全局状态(? )暂时还没想到好方法
           data2: 0,
           plusActivated: true,
           optionActivated: true,
