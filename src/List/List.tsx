@@ -6,7 +6,7 @@ import {
   ShoppingOutlined,
   UpOutlined,
 } from '@ant-design/icons'
-import { Button, Drawer, Space, Spin, Tooltip } from 'antd'
+import { Button, Divider, Drawer, Space, Spin, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import './style.css'
 import { useListStore } from '../store/ListStore'
@@ -14,7 +14,7 @@ import { useListStore } from '../store/ListStore'
 const List: React.FC<{
   title: string
   form: string //大选项
-  tag:JSX.Element //小选项
+  tag: JSX.Element //小选项
   data1: number
   data2: number
   plusActivated: boolean
@@ -164,6 +164,16 @@ const List: React.FC<{
                         <Space direction="vertical">
                           <h3 style={{ margin: 0 }}>{props.form}</h3>
                           {props.tag}
+                        </Space>
+                        <Divider />
+                        <Space direction="vertical">
+                          <Space direction="horizontal">
+                            <h3 style={{ margin: 0 }}>“进行中”限制</h3>
+                            <Button size="small" type="text">
+                              编辑
+                            </Button>
+                          </Space>
+                          {'无'}
                         </Space>
                       </Drawer>
                     </>

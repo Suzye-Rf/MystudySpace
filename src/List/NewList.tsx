@@ -123,7 +123,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
           title: content[value - 1].cont[lowerVal - 1].content,
           form: content[value - 1].main,
           tag: (
-            <Tag color={content[value - 1].cont[lowerVal - 1].color} style={{color:'gray'}}>
+            <Tag color={content[value - 1].cont[lowerVal - 1].color} style={{color:'lightgray'}}>
               {content[value - 1].cont[lowerVal - 1].content}
             </Tag>
           ),
