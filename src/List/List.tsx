@@ -7,9 +7,10 @@ import {
   UpOutlined,
 } from '@ant-design/icons'
 import { Button, Divider, Drawer, Modal, Space, Spin, Tooltip } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import { useListStore } from '../store/ListStore'
+import NewBlock from '../block/NewBlock'
 
 const List: React.FC<{
   title: string
@@ -41,6 +42,11 @@ const List: React.FC<{
     // Set extended state
     return <DownOutlined />
   })
+  const [newBlockCansee, setNewBlockCansee] = useState(false)
+  const [CanseeStr, setCanseeStr] = useState('none')
+  const [newBlockOpened, setNewBlockOpened] = useState(false)
+  // 这里记得搞一下
+
   const [pop, setPop] = useState('收起')
   const [boxStyle, setBoxStyle] = useState(boxstyle) // Set box style
   const [toolStyle, setToolStyle] = useState(toolstyle) // Set tool style
@@ -76,6 +82,11 @@ const List: React.FC<{
         return <UpOutlined />
       })
       setExtendedState(false)
+
+      if (newBlockCansee && newBlockOpened) {
+        setCanseeStr('none')
+        setNewBlockCansee(false)
+      }
       setPop('展开')
       compressbox()
       setIsVisible(false)
@@ -90,6 +101,10 @@ const List: React.FC<{
       setExtended(() => {
         return <DownOutlined />
       })
+      if (!newBlockCansee && newBlockOpened) {
+        setCanseeStr('block')
+        setNewBlockCansee(true)
+      }
       setExtendedState(true)
       setIsVisible(true)
       expandbox()
@@ -110,7 +125,17 @@ const List: React.FC<{
     setSettingOpen(false)
   }
 
-  const handleAddButtonClick = () => {}
+  const handleAddButtonClick = () => {
+    if (newBlockCansee) {
+      setCanseeStr('none')
+      setNewBlockCansee(false)
+      setNewBlockOpened(false)
+    } else {
+      setCanseeStr('block')
+      setNewBlockCansee(true)
+      setNewBlockOpened(true)
+    }
+  }
 
   const handleCancel = () => {
     setShowModal(false)
@@ -208,7 +233,17 @@ const List: React.FC<{
               )}
             </span>
           </span>
-          <div className="content"></div>
+
+          <div className="content">
+            <NewBlock
+              Cansee={CanseeStr}
+              action={{
+                todo: setCanseeStr,
+                setstat: setNewBlockOpened,
+                setshow: setNewBlockCansee,
+              }}
+            />
+          </div>
         </Spin>
       </div>
     </div>
