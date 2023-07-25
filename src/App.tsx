@@ -16,7 +16,6 @@ const App = () => {
             <NewliststatsProvider>
               <StoreListProvider>
                 <Page />
-
                 {/* 这东西要是能少点就好了 应该有办法吧 */}
               </StoreListProvider>
             </NewliststatsProvider>

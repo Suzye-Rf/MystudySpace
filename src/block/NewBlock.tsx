@@ -11,7 +11,9 @@ const NewBlock: React.FC<{
 }> = (props) => {
   const [value, setValue] = useState('')
   const [createDisabled, setDisabled] = useState(true)
-  const handleConfirm = () => {}
+  const handleConfirm = () => {
+    //这里提交新建议题
+  }
   return (
     <>
       <div
