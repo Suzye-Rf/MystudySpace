@@ -12,13 +12,14 @@ import { DownOutlined } from '@ant-design/icons'
 import { newliststats } from '../store/NewListListener'
 import { content } from '../data/data'
 import { useListStore } from '../store/ListStore'
+import { blockStore } from '../store/BlockStore'
 const { Search } = Input
 
 const NewList: React.FC<{ visibility: string }> = (props) => {
   const boxstyle = {
     // default boxstyle
     width: '400px',
-    height: '95%',
+    height: '100%',
     backgroundColor: '#FBFAFD',
     display: props.visibility,
   }
@@ -37,7 +38,8 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   const style = { margin: 20 }
   useEffect(() => {
     setFilteredMap(originalmap)
-  }, originalmap)
+  }, [originalmap])
+
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value)
     console.log(e.target.value, value)
@@ -93,6 +95,8 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   const [loading, setLoading] = useState(false)
 
   const commit = (prop: {
+    selfid:number
+    belongsTo: number
     title: string
     form: string
     tag: JSX.Element
@@ -120,14 +124,18 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
 
         //这里写提交的函数，参数为数据数组的value
         commit({
+          selfid:liststore.lists.length + 2,
+          belongsTo: liststore.lists.length + 2,
           title: content[value - 1].cont[lowerVal - 1].content,
           form: content[value - 1].main,
           tag: (
-            <Tag color={content[value - 1].cont[lowerVal - 1].color} style={{color:'lightgray'}}>
+            <Tag
+              color={content[value - 1].cont[lowerVal - 1].color}
+              style={{ color: 'lightgray' }}>
               {content[value - 1].cont[lowerVal - 1].content}
             </Tag>
           ),
-          data1: 0, //这两个值需要用全局状态(? )暂时还没想到好方法
+          data1: 0,
           data2: 0,
           plusActivated: true,
           optionActivated: true,
@@ -139,89 +147,89 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   }
 
   return (
-    <div style={stylestate} className="box1">
-      <div style={{ height: '100%' }} className="inbox">
-        <div>
-          <Space direction="vertical">
-            <h2 style={style}>新建列表</h2>
-          </Space>
-          <div style={style}>
-            <h3 style={{ margin: 0 }}>
-              <strong>范围</strong>
-            </h3>
-            <p style={{ margin: 0, color: 'gray' }}>
-              议题必须与此范围匹配才能出现在此列表中。
-            </p>
-          </div>
-          <div style={style}>
-            <Radio.Group onChange={onChange} value={value}>
-              <Space direction="vertical">
-                <Radio value={1}>标记</Radio>
-                <Radio value={2}>指派人</Radio>
-                <Radio value={3}>里程碑</Radio>
-                <Radio value={4}>迭代</Radio>
-              </Space>
-            </Radio.Group>
-          </div>
-          <div style={style}>
+    <div style={{ padding: '0 5px' }}>
+      <div style={stylestate} className="box1">
+        <div style={{ height: '100%' }} className="inbox">
+          <div>
             <Space direction="vertical">
+              <h2 style={style}>新建列表</h2>
+            </Space>
+            <div style={style}>
               <h3 style={{ margin: 0 }}>
-                <strong>值</strong>
+                <strong>范围</strong>
               </h3>
-              <Popover
-                placement="bottomLeft"
-                trigger={'click'}
-                arrow={false}
-                destroyTooltipOnHide
-                open={popup}
-                content={
-                  <div
-                    style={{
-                      width: 250,
-                      display: 'flex',
-                      flexFlow: 'column nowrap',
-                      alignItems: 'center',
-                      overflow: 'hidden',
-                    }}>
-                    <Search
-                      onSearch={(e) => {
-                        setOriginalMap(content[value - 1].cont)
-                        if (e.length === 0) {
-                          setFilteredMap(originalmap)
-                        } else {
-                          setFilteredMap(
-                            originalmap.filter((it) =>
-                              it.content
-                                .toLowerCase()
-                                .includes(searchtext.toLowerCase())
-                            )
-                          )
-                        }
-                        setRadioKey(radiokey + 1)
-                        // console.log(e)
-                        // console.log("原始",originalmap)
-                        // console.log("过滤后",filteredmap)
-                      }}
-                      placeholder="Search..."
-                      value={searchtext}
-                      onChange={(e) => {
-                        setSearchText(e.target.value)
-                      }}
-                    />
+              <p style={{ margin: 0, color: 'gray' }}>
+                议题必须与此范围匹配才能出现在此列表中。
+              </p>
+            </div>
+            <div style={style}>
+              <Radio.Group onChange={onChange} value={value}>
+                <Space direction="vertical">
+                  <Radio value={1}>标记</Radio>
+                  <Radio value={2}>指派人</Radio>
+                  <Radio value={3}>里程碑</Radio>
+                  <Radio value={4}>迭代</Radio>
+                </Space>
+              </Radio.Group>
+            </div>
+            <div style={style}>
+              <Space direction="vertical">
+                <h3 style={{ margin: 0 }}>
+                  <strong>值</strong>
+                </h3>
+                <Popover
+                  placement="bottomLeft"
+                  trigger={'click'}
+                  arrow={false}
+                  destroyTooltipOnHide
+                  open={popup}
+                  content={
                     <div
                       style={{
-                        width: '95%',
-                        height: '150px',
-                        overflowY: 'scroll',
+                        width: 250,
+                        display: 'flex',
+                        flexFlow: 'column nowrap',
+                        alignItems: 'center',
+                        overflow: 'hidden',
                       }}>
-                      <Radio.Group
-                        key={radiokey}
-                        onChange={handleSelectChange}
-                        id="radio">
-                        <Space direction="vertical">
-                          {filteredmap.map((item) => (
-                            <>
-                              <div style={{ padding: 5 }}>
+                      <Search
+                        onSearch={(e) => {
+                          setOriginalMap(content[value - 1].cont)
+                          if (e.length === 0) {
+                            setFilteredMap(originalmap)
+                          } else {
+                            setFilteredMap(
+                              originalmap.filter((it) =>
+                                it.content
+                                  .toLowerCase()
+                                  .includes(searchtext.toLowerCase())
+                              )
+                            )
+                          }
+                          setRadioKey(radiokey + 1)
+                          // console.log(e)
+                          // console.log("原始",originalmap)
+                          // console.log("过滤后",filteredmap)
+                        }}
+                        placeholder="Search..."
+                        value={searchtext}
+                        onChange={(e) => {
+                          setSearchText(e.target.value)
+                        }}
+                      />
+                      <div
+                        style={{
+                          width: '95%',
+                          height: '150px',
+                          overflowY: 'scroll',
+                        }}>
+                        <Radio.Group
+                          key={radiokey}
+                          onChange={handleSelectChange}
+                          id="radio">
+                          <Space direction="vertical">
+                            {filteredmap.map((item) => (
+                              <div style={{ padding: 5 }} key={item.key}>
                                 <Radio value={item.value}>
                                   <Tag
                                     color={item.color}
@@ -231,44 +239,44 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
                                   {item.content}
                                 </Radio>
                               </div>
-                            </>
-                          ))}
-                        </Space>
-                      </Radio.Group>
+                            ))}
+                          </Space>
+                        </Radio.Group>
+                      </div>
                     </div>
-                  </div>
-                }>
-                <Button
-                  style={{
-                    display: 'flex',
-                    flexFlow: 'row nowrap',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                  onClick={() => {
-                    if (popup) setPopup(false)
-                    else setPopup(true)
-                    // setFilteredMap(originalmap)
-                  }}
-                  danger={danger}>
-                  <p>{btnvalue}</p> <DownOutlined size={5} />
-                </Button>
-                <span style={{ display: dangerNotice }}>
-                  <p style={{ color: 'red' }}>该字段是必填字段。</p>
-                </span>
-              </Popover>
-            </Space>
+                  }>
+                  <Button
+                    style={{
+                      display: 'flex',
+                      flexFlow: 'row nowrap',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                    onClick={() => {
+                      if (popup) setPopup(false)
+                      else setPopup(true)
+                      // setFilteredMap(originalmap)
+                    }}
+                    danger={danger}>
+                    <p>{btnvalue}</p> <DownOutlined size={5} />
+                  </Button>
+                  <span style={{ display: dangerNotice }}>
+                    <p style={{ color: 'red' }}>该字段是必填字段。</p>
+                  </span>
+                </Popover>
+              </Space>
+            </div>
           </div>
-        </div>
-        <div>
-          <Button
-            style={style}
-            type="primary"
-            onClick={handleOk}
-            loading={loading}>
-            添加到面板
-          </Button>
-          <Button onClick={handleCancelorCommit}>取消</Button>
+          <div>
+            <Button
+              style={style}
+              type="primary"
+              onClick={handleOk}
+              loading={loading}>
+              添加到面板
+            </Button>
+            <Button onClick={handleCancelorCommit}>取消</Button>
+          </div>
         </div>
       </div>
     </div>

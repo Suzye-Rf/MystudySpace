@@ -8,11 +8,20 @@ import { useListStore } from './store/ListStore'
 import { Listsvisibility } from './store/ListVisibility'
 import NewList from './List/NewList'
 import { newliststats } from './store/NewListListener'
+import { blockStore } from './store/BlockStore'
+import { MouseEventHandler, useState } from 'react'
+import { event } from 'jquery'
 
 const Page: React.FC = () => {
   const Vi = Listsvisibility()
   const newliststat = newliststats()
   const liststore = useListStore()
+  const blockstore = blockStore()
+
+  // Create Animation drag
+  
+   
+
   return (
     <>
       <Layout>
@@ -29,57 +38,69 @@ const Page: React.FC = () => {
           }}>
           <SwitchBoard />
           <Searching />
-
           <Options />
         </Header>
       </Layout>
       <Layout style={{ height: '100vh' }}>
         <Content>
-          <div style={{ height: '93vh', backgroundColor: '#ffffff' }}>
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                height: '100%',
-                width: '100%',
-                display: 'flex',
-                flexFlow: 'row nowrap',
-                overflowX: 'scroll',
-              }}>
-              <List
-                {...{
-                  title: '开放中',
-                  form:'',
-                  tag:<></>,
-                  data1: 0,
-                  data2: 0,
-                  plusActivated: true,
-                  optionActivated: false,
-                  Display: Vi.Opening,
-                }}
-                key={Vi.key}
-              />
-              {liststore.lists.map((item) => {
-                return <List {...item} />
-              })}
-              <List
-                {...{
-                  title: 'Closed',
-                  form:'',
-                  tag:<></>,
-                  data1: 0,
-                  data2: 0,
-                  plusActivated: false,
-                  optionActivated: false,
-                  Display: Vi.Closed,
-                }}
-                key={Vi.key + 10}
-              />
-              <NewList
-                {...{
-                  visibility: newliststat.newlistvisible,
-                }}
-                key={newliststat.key}></NewList>
-            </div>
+          <div
+            style={{
+              height: '93vh',
+              backgroundColor: '#ffffff',
+              width: '100%',
+              display: 'flex',
+              flexFlow: 'row nowrap',
+              overflowX: 'scroll',
+              padding: '10px 8px 16px 0',
+            }}>
+            <List
+              {...{
+                selfid: 1,
+                belongsTo: 1,
+                title: '开放中',
+                form: '',
+                tag: <></>,
+                data1: blockstore.blockList.filter(
+                  (items) => items.belongsto === 1
+                ).length,
+                data2: 0,
+                plusActivated: true,
+                optionActivated: false,
+                Display: Vi.Opening,
+              }}
+              key={Vi.key}
+              ICanDrag={false}
+            />
+            {liststore.lists.map((item) => {
+              return (
+                <div  key={item.belongsTo} >
+                  <List {...item} ICanDrag  />
+                </div>
+              )
+            })}
+            <List
+              {...{
+                selfid: 0,
+                belongsTo: 0,
+                title: 'Closed',
+                form: '',
+                tag: <></>,
+                data1: blockstore.blockList.filter(
+                  (items) => items.id !== 0 && items.belongsto === 0
+                ).length,
+                data2: 0,
+                plusActivated: false,
+                optionActivated: false,
+                Display: Vi.Closed,
+              }}
+              ICanDrag={false}
+              key={Vi.key + 10}
+            />
+            <NewList
+              {...{
+                visibility: newliststat.newlistvisible,
+              }}
+              key={newliststat.key}></NewList>
           </div>
         </Content>
       </Layout>

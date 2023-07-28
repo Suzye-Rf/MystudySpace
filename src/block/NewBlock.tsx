@@ -1,7 +1,10 @@
 import { Button, Input } from 'antd'
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
+import { blockStore } from '../store/BlockStore'
+
 
 const NewBlock: React.FC<{
+  belongsTo: number
   Cansee: string
   action: {
     todo: React.Dispatch<React.SetStateAction<string>>
@@ -9,11 +12,26 @@ const NewBlock: React.FC<{
     setshow: React.Dispatch<React.SetStateAction<boolean>>
   }
 }> = (props) => {
+  const block = blockStore()
   const [value, setValue] = useState('')
   const [createDisabled, setDisabled] = useState(true)
   const handleConfirm = () => {
     //这里提交新建议题
+    block.Addlist({
+      name: value,
+      id: block.blockList.length + 1,
+      belongsto: props.belongsTo,
+    })
+    //让新建框消失
+    props.action.todo('none')
+    props.action.setstat(false)
+    props.action.setshow(false)
+    setDisabled(true)
+    setValue('')
+    
   }
+  
+  
   return (
     <>
       <div
@@ -40,7 +58,10 @@ const NewBlock: React.FC<{
               justifyContent: 'space-between',
               margin: '10px 0 0 0',
             }}>
-            <Button type="primary" disabled={createDisabled}>
+            <Button
+              type="primary"
+              disabled={createDisabled}
+              onClick={handleConfirm}>
               创建议题
             </Button>
             <Button

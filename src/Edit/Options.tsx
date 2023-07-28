@@ -9,7 +9,7 @@ const Options: React.FC = () => {
   const style = { margin: '2px' }
 
   const handleCreate = () => {
-    console.log(options.newlistvisible)
+    
     options.updateState('block')
     options.updateBtn()
     

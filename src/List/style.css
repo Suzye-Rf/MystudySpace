@@ -1,9 +1,12 @@
 .box{
-  margin: 20px 10px;
+  
   border-radius: 5px !important;
 }
+.outer{
+  padding:0 5px;
+  height: 100%;
+}
 .box1{
-  margin: 20px 10px;
   min-width: 400px;
   border-radius: 5px !important;
 }
