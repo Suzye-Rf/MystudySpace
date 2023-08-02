@@ -175,24 +175,11 @@ const List: React.FC<{
     }, 100)
   }
 
-  const onDragEnd = (result: any) => {
-    const { destination, source } = result
-    if (!destination) return
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return
-    }
-    console.log(props.belongsTo)
-    // blockstore.Swap(source.droppableId, destination.droppableId)
-  }
-
   return (
     <>
-      <div className="outer">
+      <div className="outer" key={props.belongsTo}>
         <div style={boxStyle} className="box">
-          <Spin spinning={loading}>
+          <Spin spinning={loading} style={boxStyle}>
             <span className="separator" style={toolStyle}>
               <span style={{ whiteSpace: 'nowrap', margin: '5px' }}>
                 <Tooltip placement="top" title={pop}>
@@ -272,58 +259,43 @@ const List: React.FC<{
                 )}
               </span>
             </span>
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable
-                droppableId={'container' + props.belongsTo}
-                key={props.belongsTo}>
-                {(provided, snapshot) => (
-                  <div
-                    className="content"
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    style={{
-                      backgroundColor: snapshot.isDraggingOver
-                        ? 'lightgray'
-                        : '#ECECEF',
-                    }}
-                    key={props.belongsTo}>
-                    {blockstore.blockList.map(
-                      (items) =>
-                        items.belongsto === props.belongsTo && (
-                          <Draggable
-                            draggableId={`${items.id}`}
-                            index={items.id}>
-                            {(provided) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.dragHandleProps}
-                                {...provided.draggableProps}
-                                key={items.id}>
-                                <Blocks
-                                  name={items.name}
-                                  id={items.id}
-                                  belongsto={items.belongsto}
-                                  cansee={dataBlockCansee}
-                                />
-                              </div>
-                            )}
-                          </Draggable>
-                        )
-                    )}
-                    <NewBlock
-                      belongsTo={props.belongsTo}
-                      Cansee={CanseeStr}
-                      action={{
-                        todo: setCanseeStr,
-                        setstat: setNewBlockOpened,
-                        setshow: setNewBlockCansee,
-                      }}
-                    />
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
+
+            <Droppable droppableId={'container' + props.belongsTo}>
+              {(provided, snapshot) => (
+                <div
+                  className="content"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{
+                    backgroundColor: snapshot.isDraggingOver
+                      ? 'lightgray'
+                      : '#ECECEF',
+                  }}
+                  key={props.belongsTo}>
+                  <div style={{height:10}}></div>
+                  {blockstore.blockList.map(
+                    (items, index) =>
+                      items.belongsto === props.belongsTo && (
+                        <Blocks
+                          {...items}
+                          index={index}
+                          cansee={dataBlockCansee}
+                        />
+                      )
+                  )}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+            <NewBlock
+              belongsTo={props.belongsTo}
+              Cansee={CanseeStr}
+              action={{
+                todo: setCanseeStr,
+                setstat: setNewBlockOpened,
+                setshow: setNewBlockCansee,
+              }}
+            />
           </Spin>
         </div>
       </div>
