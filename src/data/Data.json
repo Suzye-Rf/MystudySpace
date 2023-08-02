@@ -49,15 +49,18 @@
   "Assigner": [
     {
       "Avatar": "#",
-      "Name": "某某某一号"
+      "Name": "某某某一号",
+      "account": "@moumoumouyihao"
     },
     {
       "Avatar": "#",
-      "Name": "某某某二号"
+      "Name": "某某某二号",
+      "account":"@moumoumouerhao"
     },
     {
       "Avatar": "#",
-      "Name": "某某某三号"
+      "Name": "某某某三号",
+      "account":"@moumoumousanhao"
     }
   ],
   "Weight": [

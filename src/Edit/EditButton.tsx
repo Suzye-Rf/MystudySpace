@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Checkbox,
   Divider,
@@ -18,6 +19,7 @@ import {
   DownOutlined,
   SearchOutlined,
   TagsOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
 import data from '../data/Data.json'
 import { CheckboxValueType } from 'antd/es/checkbox/Group'
@@ -528,6 +530,8 @@ const Edit: React.FC = () => {
               style={{
                 borderBottom: '1px solid',
                 borderBottomColor: 'lightgray',
+                display: 'flex',
+                flexFlow: 'column nowrap',
               }}>
               <div
                 style={{
@@ -537,11 +541,81 @@ const Edit: React.FC = () => {
                   alignItems: 'center',
                 }}>
                 <p>指派人</p>
-                <Button type="text" size="small">
+                <Button
+                  type="text"
+                  size="small"
+                  onClick={() =>
+                    Assigner ? makeAssigner(false) : makeAssigner(true)
+                  }>
                   编辑
                 </Button>
               </div>
-              <p style={{ color: 'gray', margin: 2 }}>任何指派人</p>
+              {!Assigner && AssignerT}
+              {Assigner && (
+                <Popover
+                  arrow={false}
+                  open
+                  placement="top"
+                  content={
+                    <div style={{ display: 'flex', flexFlow: 'column nowrap' }}>
+                      <Input
+                        prefix={<SearchOutlined />}
+                        placeholder="搜索指派人"
+                      />
+                      <Button
+                        type="text"
+                        onClick={() => {
+                          makeAssignerT(
+                            <strong style={{ margin: 2 }}>任何指派人</strong>
+                          )
+                          makeAssigner(false)
+                        }}>
+                        任何指派人
+                      </Button>
+                      <Divider style={{ margin: 4 }} />
+                      {data.Assigner.map((items) => (
+                        <Button
+                          type="text"
+                          size="large"
+                          style={{
+                            display: 'flex',
+                            flexFlow: 'row nowrap',
+                            justifyContent: 'flex-start',
+                            alignItems: 'center',
+                          }}>
+                          <Avatar icon={<UserOutlined />} />
+                          <span
+                            style={{
+                              display: 'flex',
+                              flexFlow: 'column nowrap',
+                              justifyContent: 'center',
+                            }}>
+                            <div style={{ fontSize: 15 }}>{items.Name}</div>
+                            <div style={{ fontSize: 10 }}>{items.account}</div>
+                          </span>
+                        </Button>
+                      ))}
+                    </div>
+                  }
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    flexFlow: 'column nowrap',
+                  }}>
+                  <Button
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                    onClick={() =>
+                      Assigner ? makeAssigner(false) : makeAssigner(true)
+                    }>
+                    {AssignerT}
+                    <DownOutlined />
+                  </Button>
+                </Popover>
+              )}
               {/*TODO: There's a state here,Need 2 be edited*/}
             </div>
             <div
