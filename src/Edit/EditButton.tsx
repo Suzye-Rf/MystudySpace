@@ -566,7 +566,7 @@ const Edit: React.FC = () => {
                         type="text"
                         onClick={() => {
                           makeAssignerT(
-                            <strong style={{ margin: 2 }}>任何指派人</strong>
+                            <p style={{ margin: 2,color:'gray'}}>任何指派人</p>
                           )
                           makeAssigner(false)
                         }}>
@@ -582,6 +582,28 @@ const Edit: React.FC = () => {
                             flexFlow: 'row nowrap',
                             justifyContent: 'flex-start',
                             alignItems: 'center',
+                          }}
+                          onClick={() => {
+                            makeAssignerT(
+                              <div style={{display:'flex',flexFlow:'row nowrap',justifyContent:'flex-start',alignItems:'center'}}>
+                                <Avatar icon={<UserOutlined />} />
+                                <span
+                                  style={{
+                                    display: 'flex',
+                                    flexFlow: 'column nowrap',
+                                    justifyContent: 'center',
+                                    margin:'0 5px'
+                                  }}>
+                                  <div style={{ fontSize: 15 }}>
+                                    {items.Name}
+                                  </div>
+                                  <div style={{ fontSize: 10 }}>
+                                    {items.account}
+                                  </div>
+                                </span>
+                              </div>
+                            )
+                            makeAssigner(false)
                           }}>
                           <Avatar icon={<UserOutlined />} />
                           <span
@@ -611,7 +633,7 @@ const Edit: React.FC = () => {
                     onClick={() =>
                       Assigner ? makeAssigner(false) : makeAssigner(true)
                     }>
-                    {AssignerT}
+                    <p style={{margin:2,color:'gray'}}>选择指派人</p>
                     <DownOutlined />
                   </Button>
                 </Popover>
