@@ -1,0 +1,88 @@
+{
+  "milestones": [
+    "人才成长体系"
+  ],
+  "iterations": [
+    "Any",
+    "Current",
+    "7月11,2022 - 7月17,2022",
+    ".........."
+  ],
+  "Marks": [
+    {
+      "Color": "#36454F",
+      "Name": "AI"
+    },
+    {
+      "Color": "#6699CC",
+      "Name": "API"
+    },
+    {
+      "Color": "#9400D3",
+      "Name": "Backend"
+    },
+    {
+      "Color": "#6699CC",
+      "Name": "Doing"
+    },
+    {
+      "Color": "#009966",
+      "Name": "Done"
+    },
+    {
+      "Color": "#0000FF",
+      "Name": "Frontend"
+    },
+    {
+      "Color": "#FF0000",
+      "Name": "Help"
+    },
+    {
+      "Color": "#6699CC",
+      "Name": "Joint Debug"
+    },
+    {
+      "Color": "#ED9121",
+      "Name": "To Do"
+    }
+  ],
+  "Assigner": [
+    {
+      "Avatar": "#",
+      "Name": "某某某一号"
+    },
+    {
+      "Avatar": "#",
+      "Name": "某某某二号"
+    },
+    {
+      "Avatar": "#",
+      "Name": "某某某三号"
+    }
+  ],
+  "Weight": [
+    "None",
+    "Any Weight",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20"
+  ]
+}
