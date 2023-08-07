@@ -1,14 +1,22 @@
 import { createStore } from 'hox'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const [blockStore, BlockStoreProvider] = createStore(() => {
   const [blockList, setBlockList] = useState<
     { name: string; id: number; belongsto: number }[]
   >([])
 
+  const Edit = (identification:number, Name:string) => {
+    let index = blockList.findIndex(item => item.id === identification)
+    let belong = blockList[index].belongsto
+    let temp = blockList
+    temp.splice(index,1,{ name: Name, id: identification, belongsto: belong })
+    
+    
+  }
+
   const Addlist = (thing: { name: string; id: number; belongsto: number }) => {
     setBlockList([...blockList, thing])
-    console.log(blockList)
   }
   const Delete = (name: string) => {
     setBlockList(blockList.filter((item) => item.name !== name))
@@ -61,6 +69,7 @@ export const [blockStore, BlockStoreProvider] = createStore(() => {
     Addlist,
     Delete,
     Swap,
-    Switch
+    Switch,
+    Edit
   }
 })

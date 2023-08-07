@@ -260,7 +260,7 @@ const List: React.FC<{
               </span>
             </span>
 
-            <Droppable droppableId={'container' + props.belongsTo}>
+            <Droppable droppableId={'container' + props.belongsTo} >
               {(provided, snapshot) => (
                 <div
                   className="content"
@@ -280,6 +280,7 @@ const List: React.FC<{
                           {...items}
                           index={index}
                           cansee={dataBlockCansee}
+                          key={index}
                         />
                       )
                   )}

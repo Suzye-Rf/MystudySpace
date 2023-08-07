@@ -39,7 +39,7 @@ const Assigners : React.FC = () =>{
     {Assigner && (
       <Popover
         arrow={false}
-        open
+        defaultOpen
         placement="top"
         content={
           <div style={{ display: 'flex', flexFlow: 'column nowrap' }}>

@@ -1,9 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  Input,
-  Modal,
-} from 'antd'
+import { Button, Checkbox, Form, Input, Modal } from 'antd'
 import { useState } from 'react'
 import { currentdashboard } from '../store/CurrentDashBorad'
 import { CheckboxChangeEvent } from 'antd/es/checkbox'
@@ -13,6 +8,8 @@ import Iterations from './Forms/Iterations'
 import Marks from './Forms/Marks'
 import Assigners from './Forms/Assigners'
 import Weight from './Forms/Weight'
+import { useForm } from 'antd/es/form/Form'
+import OptForm from './Form'
 
 const style = { margin: '2px' }
 const Edit: React.FC = () => {
@@ -41,6 +38,7 @@ const Edit: React.FC = () => {
       setShowState(false)
     }, 800)
   }
+  
 
   return (
     <>
@@ -107,14 +105,9 @@ const Edit: React.FC = () => {
         <div>
           <h3 style={{ margin: '10px 0' }}>范围</h3>
           <p style={{ color: 'gray' }}>看板范围会影响看板访问者可见的议题</p>
-          {/* -----------下面都是设置选项了------------- */}
-          <div>
-            <MileStone />
-            <Iterations />
-            <Marks />
-            <Assigners />
-            <Weight />
-          </div>
+            <Form name='editForm' method='POST'>
+              <OptForm />
+            </Form>
         </div>
       </Modal>
     </>

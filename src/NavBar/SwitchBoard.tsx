@@ -3,20 +3,19 @@ import { Button, Divider, Input, Modal, Popover } from 'antd'
 import { useState } from 'react'
 import { usedDashBoardStore } from '../store/MainDashBoradStates'
 import { currentdashboard } from '../store/CurrentDashBorad'
+import NewBoard from './NewDashBoard'
 // ----------------------------------------------------------------
 const SwitchBoard: React.FC = () => {
   const { DashBoards } = usedDashBoardStore()
   const { Update, current } = currentdashboard()
   const [searchtext, setSearchText] = useState('')
-  const [modalstat, setmodalstat] = useState(false)
+  
   const handleButtonClick = (key: string) => {
     console.log(key)
     Update(key)
     // TODO: Handle button clicks here instead of using the default implementation.
   }
-  const handleCreateDashboard = () => {
-    setmodalstat(true)
-  }
+  
   return (
     <>
       <span className="AddDashBoard" style={{ flexGrow: 1, margin: '0 5px' }}>
@@ -45,7 +44,7 @@ const SwitchBoard: React.FC = () => {
                   setSearchText(e.target.value)
                 }}
               />
-
+              
               {DashBoards.map((dashboard) => (
                 <Button
                   type="text"
@@ -56,12 +55,7 @@ const SwitchBoard: React.FC = () => {
                 </Button>
               ))}
               <Divider />
-              <Button
-                type="text"
-                style={{ width: '100%', display: 'flex' }}
-                onClick={handleCreateDashboard}>
-                创建新的看板
-              </Button>
+              <NewBoard />
             </>
           }>
           <Button style={{ width: '150px' }}>
@@ -79,10 +73,7 @@ const SwitchBoard: React.FC = () => {
             </span>
           </Button>
         </Popover>
-        <Modal title="创建新看板" open={modalstat}>
-          {/* //////////////////////////////////// */}
-          //////////////////////////////////
-        </Modal>
+        
       </span>
     </>
   )

@@ -1,14 +1,23 @@
-import { Input } from "antd"
-import { useState } from "react"
+import { Empty, Input, Popover } from 'antd'
+import { useState } from 'react'
 
 const { Search } = Input
 const Searching = () => {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('搜索')
 
   const onSearch = () => {}
 
   return (
-    <Search placeholder="搜索" onSearch={onSearch} style={{ flexGrow: 1 }} />
+    <Popover trigger={'focus'} content={<Empty/>}>
+      <Search
+      placeholder={search}
+      onSearch={onSearch}
+      onFocus={() => setSearch('别搜了吧? 啥也没有欸! ')}
+      onBlur={() => setSearch('搜索')}
+      style={{ flexGrow: 1 }}
+      />
+    </Popover>
+    
   )
 }
 
