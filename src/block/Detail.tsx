@@ -1,10 +1,10 @@
 import { QuestionCircleOutlined, EyeOutlined } from '@ant-design/icons'
 import { Button, Divider, Switch } from 'antd'
-import { useState } from 'react'
 import Title from './OptDetail/Title'
 import Assign from './OptDetail/Assign'
 import ShitPoem from './OptDetail/ShitPoem'
 import Milestone from './OptDetail/MileStone'
+import Iterator from './OptDetail/Itearation'
 
 const Detail: React.FC<{ Name: string; id: number }> = (props) => {
   return (
@@ -17,24 +17,7 @@ const Detail: React.FC<{ Name: string; id: number }> = (props) => {
       <Divider style={{ margin: '15px 0' }} />
       <Milestone />
       <Divider style={{ margin: '15px 0' }} />
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row nowrap',
-            justifyContent: 'space-between',
-          }}>
-          <span>
-            <strong>迭代</strong>
-          </span>
-          <Button type="text" size="small">
-            编辑
-          </Button>
-        </div>
-        <div>
-          <span style={{ color: 'gray' }}>无</span>
-        </div>
-      </div>
+      <Iterator />
       <Divider style={{ margin: '15px 0' }} />
       <div>
         <div

@@ -61,7 +61,7 @@ const ShitPoem: React.FC = () => {
                       setText('无')
                       setModify(false)
                     }}>
-                    史诗
+                    无史诗
                   </Button>
                   <Divider style={{ margin: '15px 0' }} />
                   <Button
