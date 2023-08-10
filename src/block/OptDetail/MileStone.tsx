@@ -81,6 +81,7 @@ const Milestone: React.FC = () => {
                         justifyContent: 'space-between',
                         alignItems: 'center',
                       }}
+                      key={item}
                       onClick={() => {
                         {
                           setMakeid(item)

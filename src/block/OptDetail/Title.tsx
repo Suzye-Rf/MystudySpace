@@ -1,13 +1,14 @@
 import { Button, Input } from 'antd'
-import { useState } from 'react'
-import { blockStore } from '../../store/BlockStore';
+import { useEffect, useState } from 'react'
+import { blockStore } from '../../store/BlockStore'
 
 const Title: React.FC<{ Name: string; id: number }> = (props) => {
   const blockstore = blockStore()
   const [CanIModify, setCanIModify] = useState(false)
   const [textval, setTextval] = useState(props.Name)
   const handleSubmit = () => {
-    blockstore.Edit(props.id,textval)
+    blockstore.Edit(props.id, textval)
+
     setCanIModify(false)
   }
   const handleCancel = () => {
