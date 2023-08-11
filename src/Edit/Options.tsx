@@ -2,10 +2,11 @@ import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import { Button, Select, Switch, Tooltip } from 'antd'
 import Edit from './EditButton'
 import { newliststats } from '../store/NewListListener'
-import { useState } from 'react'
+import { Tags } from '../store/Tags'
 
 const Options: React.FC = () => {
   const options = newliststats()
+  const tag = Tags()
   const style = { margin: '2px' }
 
   const handleCreate = () => {
@@ -29,7 +30,8 @@ const Options: React.FC = () => {
         <Switch
           checkedChildren={<CheckOutlined />}
           unCheckedChildren={<CloseOutlined />}
-          defaultChecked={false}
+          checked={tag.Switch}
+          onClick={tag.Change}
         />
       </span>
       <span

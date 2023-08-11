@@ -1,7 +1,8 @@
 import { Button, Input } from 'antd'
-import {  useState } from 'react'
+import { useState } from 'react'
 import { blockStore } from '../store/BlockStore'
-
+import { Tags } from '../store/Tags'
+import { dataSource } from '../store/BlockData'
 
 const NewBlock: React.FC<{
   belongsTo: number
@@ -12,10 +13,30 @@ const NewBlock: React.FC<{
     setshow: React.Dispatch<React.SetStateAction<boolean>>
   }
 }> = (props) => {
+  //引用tags
+  const tag = Tags()
+  const DB = dataSource()
   const block = blockStore()
   const [value, setValue] = useState('')
   const [createDisabled, setDisabled] = useState(true)
   const handleConfirm = () => {
+    tag.setTeg([...tag.Tag, { id: block.blockList.length + 1, tags: [] }])
+    DB.setDataState([
+      ...DB.dataState,
+      {
+        id: block.blockList.length + 1,
+        data: {
+          Assign: [],
+          ShitPoem: ['无'],
+          MileStone: ['none'],
+          Iteration: [<span style={{ color: 'gray' }}>无</span>],
+          DeadLine: ['无'],
+          Mark: [[]],
+          Weight: ['无'],
+          Private: [''],
+        },
+      },
+    ])
     //这里提交新建议题
     block.Addlist({
       name: value,
@@ -28,10 +49,8 @@ const NewBlock: React.FC<{
     props.action.setshow(false)
     setDisabled(true)
     setValue('')
-    
   }
-  
-  
+
   return (
     <>
       <div

@@ -1,16 +1,50 @@
-import {
-  CloseOutlined,
-  SearchOutlined,
-  DownOutlined,
-} from '@ant-design/icons'
+import { CloseOutlined, SearchOutlined, DownOutlined } from '@ant-design/icons'
 import { Button, Checkbox, Input, Popover, Tag } from 'antd'
 import { CheckboxValueType } from 'antd/es/checkbox/Group'
 import data from '../../data/Data.json'
-
+import { Tags } from '../../store/Tags'
 import { useEffect, useState } from 'react'
+import { dataSource } from '../../store/BlockData'
 
-const Mark: React.FC = () => {
+const subSet = function (
+  arr1: Array<CheckboxValueType>,
+  arr2: Array<CheckboxValueType>
+) {
+  var set1 = new Set(arr1)
+  var set2 = new Set(arr2)
+
+  var subset: CheckboxValueType[] = []
+  if (set1.size > set2.size) {
+    set1.forEach((item) => {
+      if (!set2.has(item)) {
+        subset.push(item)
+      }
+    })
+  } else {
+    set2.forEach((item) => {
+      if (!set1.has(item)) {
+        subset.push(item)
+      }
+    })
+  }
+
+  return subset
+}
+
+const Mark: React.FC<{ id: number; data: CheckboxValueType[][] }> = (props) => {
+  const db = dataSource()
+  let dts: CheckboxValueType[][]= db.dataState.find(
+    (item) => item.id === props.id
+  )?.data.Mark as CheckboxValueType[][]
+  const tag = Tags()
   const handleCheckBoxChange = (value: CheckboxValueType[]) => {
+    let temp = subSet(marklist, value)
+    if (temp !== undefined) {
+      if(!dts[0].includes(temp[0])) {
+        dts[0].push(temp[0])
+      }
+      tag.Add(props.id, String(temp[0]))
+    }
     makeMarkText(() => {
       if (value.length === 0)
         return <p style={{ color: 'gray', margin: 2 }}>任何标记</p>
@@ -31,7 +65,7 @@ const Mark: React.FC = () => {
       // TODO:Here should be a multiple of iterations
       <p style={{ color: 'gray', margin: 2 }}>任何标记</p>
     ),
-    [marklist, setMarkList] = useState<CheckboxValueType[]>([])
+    [marklist, setMarkList] = useState<CheckboxValueType[]>(dts[0])
 
   useEffect(() => {
     makeMarkText(() => {
@@ -46,7 +80,7 @@ const Mark: React.FC = () => {
           </p>
         )
     })
-  }, [marksText])
+  }, [marklist])
   return (
     <div>
       <div
@@ -81,6 +115,9 @@ const Mark: React.FC = () => {
                   setMarkList(
                     marklist.filter((i) => String(i) !== String(item))
                   )
+                  dts.pop()
+                  dts.push(marklist.filter((i) => String(i) !== String(item)))
+                  tag.Add(props.id, String(item))
                 }}>
                 <CloseOutlined size={1} />
               </Button>

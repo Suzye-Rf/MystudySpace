@@ -1,5 +1,4 @@
-import { EyeOutlined } from '@ant-design/icons'
-import { Button, Divider, Switch } from 'antd'
+import { Divider } from 'antd'
 import Title from './OptDetail/Title'
 import Assign from './OptDetail/Assign'
 import ShitPoem from './OptDetail/ShitPoem'
@@ -7,80 +6,81 @@ import Milestone from './OptDetail/MileStone'
 import Iterator from './OptDetail/Itearation'
 import UsedTime from './OptDetail/UsedTime'
 import DeadLine from './OptDetail/DeadLine'
-import Marks from '../Edit/Forms/Marks'
 import Mark from './OptDetail/Mark'
+import Weigh from './OptDetail/Weigh'
+import Private from './OptDetail/Privacy'
+import Notice from './OptDetail/Notice'
+import { dataSource } from '../store/BlockData'
+import { CheckboxValueType } from 'antd/es/checkbox/Group'
 
 const Detail: React.FC<{ Name: string; id: number }> = (props) => {
+  const style = { margin: '15px 0' }
+  const dts = dataSource()
   return (
     <>
       <Title Name={props.Name} id={props.id} />
-      <Divider style={{ margin: '15px 0' }} />
-      <Assign />
-      <Divider style={{ margin: '15px 0' }} />
-      <ShitPoem />
-      <Divider style={{ margin: '15px 0' }} />
-      <Milestone />
-      <Divider style={{ margin: '15px 0' }} />
-      <Iterator />
-      <Divider style={{ margin: '15px 0' }} />
+      <Divider style={style} />
+      <Assign
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .Assign as CheckboxValueType[]
+        }
+      />
+      <Divider style={style} />
+      <ShitPoem
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .ShitPoem as string[]
+        }
+      />
+      <Divider style={style} />
+      <Milestone
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .MileStone as string[]
+        }
+      />
+      <Divider style={style} />
+      <Iterator
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .Iteration as JSX.Element[]
+        }
+      />
+      <Divider style={style} />
       <UsedTime />
-      <Divider style={{ margin: '15px 0' }} />
-      <DeadLine />
-      <Divider style={{ margin: '15px 0' }} />
-      <Mark />
-      <Divider style={{ margin: '15px 0' }} />
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row nowrap',
-            justifyContent: 'space-between',
-          }}>
-          <span>
-            <strong>权重</strong>
-          </span>
-          <Button type="text" size="small">
-            编辑
-          </Button>
-        </div>
-        <div>
-          <span style={{ color: 'gray' }}>无</span>
-        </div>
-      </div>
-      <Divider style={{ margin: '15px 0' }} />
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row nowrap',
-            justifyContent: 'space-between',
-          }}>
-          <span>
-            <strong>私密性</strong>
-          </span>
-          <Button type="text" size="small">
-            编辑
-          </Button>
-        </div>
-        <div>
-          <span style={{ color: 'gray' }}>
-            <EyeOutlined />
-            一览无余
-          </span>
-        </div>
-      </div>
-      <Divider style={{ margin: '15px 0' }} />
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'row nowrap',
-          justifyContent: 'space-between',
-        }}>
-        <span>
-          <strong>通知</strong>
-        </span>
-        <Switch />
-      </div>
+      <Divider style={style} />
+      <DeadLine
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .DeadLine as string[]
+        }
+      />
+      <Divider style={style} />
+      <Mark
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .Mark as CheckboxValueType[][]
+        }
+      />
+      <Divider style={style} />
+      <Weigh
+        id={props.id}
+        data={
+          dts.dataState.find((i) => i.id === props.id)?.data
+            .Weight as string[]
+        }
+      />
+      <Divider style={style} />
+      <Private />
+      <Divider style={style} />
+      <Notice />
     </>
   )
 }

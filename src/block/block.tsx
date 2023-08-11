@@ -1,9 +1,11 @@
-import { CopyOutlined } from '@ant-design/icons'
+import { CopyOutlined, ShoppingOutlined } from '@ant-design/icons'
 import { Button, Drawer, Space, Tag, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import Detail from './Detail'
-
+import { Tags } from '../store/Tags'
+import data from '../data/Data.json'
+import { dataSource } from '../store/BlockData'
 const Blocks: React.FC<{
   name: string
   id: number
@@ -11,31 +13,36 @@ const Blocks: React.FC<{
   cansee: string
   index: number
 }> = (props) => {
+  const tag = Tags()
+  const db = dataSource()
+  let dts: string[] = db.dataState.find((item) => item.id === props.id)?.data
+    .Weight as string[]
   const [backgroundColor, setBack] = useState('#FFFFFF')
   const [option, setOption] = useState(false)
-
   const [adding, makeadding] = useState(false)
   const [status, makeStatus] = useState('添加一个代办事项')
   const [stat, makeStat] = useState(false)
+  
+
   useEffect(() => {
     if (option) setBack('#E9F3FC')
     else setBack('#FFFFFF')
   }, [option])
+
   
 
   const handleAddButtonClick = () => {
     makeadding(true)
     setTimeout(() => {
-      if(stat) {
+      if (stat) {
         makeStat(false)
         makeStatus('添加一个代办事项')
-      }
-      else {
+      } else {
         makeStat(true)
         makeStatus('标记为已完成')
       }
       makeadding(false)
-    }, 1000);
+    }, 1000)
   }
 
   return (
@@ -62,11 +69,30 @@ const Blocks: React.FC<{
               onClick={() => setOption(true)}>
               <Space direction="vertical" style={{ margin: '0 15px' }}>
                 <h3>{props.name}</h3>
+                {tag.Switch && (
+                  <Space direction="horizontal">
+                    {tag.Tag.find((it) => it.id === props.id)?.tags.map(
+                      (item) => (
+                        <Tag
+                          color={data.Marks.find((i) => i.Name === item)?.Color}
+                          key={item}>
+                          {item}
+                        </Tag>
+                      )
+                    )}
+                  </Space>
+                )}
                 <Space direction="horizontal">
                   <Tag color="gray">
                     <CopyOutlined />
                   </Tag>
                   <p># {props.id}</p>
+                  {dts[0] !== '无' && (
+                    <span>
+                      <ShoppingOutlined style={{ margin: '0 5px 0 0' }} />
+                      {dts[0]}
+                    </span>
+                  )}
                 </Space>
               </Space>
             </div>

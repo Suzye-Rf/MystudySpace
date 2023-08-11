@@ -2,10 +2,14 @@ import { DownCircleOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button, Divider, Input, Popover } from 'antd'
 
 import { useState } from 'react'
+import { dataSource } from '../../store/BlockData'
 
-const ShitPoem: React.FC = () => {
+const ShitPoem: React.FC<{ id: number; data: string[] }> = (props) => {
+  const db = dataSource()
+  let data: string[] = db.dataState.find((it) => it.id === props.id)?.data
+    .ShitPoem as string[]
   const [modify, setModify] = useState(false)
-  const [text, setText] = useState('无')
+  const [text, setText] = useState(props.data)
   return (
     <div>
       <div
@@ -32,11 +36,11 @@ const ShitPoem: React.FC = () => {
       </div>
       <div style={{ display: 'flex', flexFlow: 'column nowrap' }}>
         {!modify &&
-          (text === '无' ? (
+          (text[0] === '无' ? (
             <span style={{ color: 'gray' }}>无</span>
           ) : (
             <strong>
-              <a style={{ color: 'black' }}>{text}</a>
+              <a style={{ color: 'black' }}>{text[0]}</a>
             </strong>
           ))}
         {modify && (
@@ -58,7 +62,9 @@ const ShitPoem: React.FC = () => {
                     style={{ textAlign: 'left' }}
                     type="text"
                     onClick={() => {
-                      setText('无')
+                      setText(['无'])
+                      data.pop()
+                      data.push('无')
                       setModify(false)
                     }}>
                     无史诗
@@ -75,7 +81,11 @@ const ShitPoem: React.FC = () => {
                       alignItems: 'center',
                     }}
                     onClick={() => {
-                      setText(
+                      setText([
+                        '作为【管理员】，我可以【管理关卡】，以便【学生能够有序完成指定任务】。',
+                      ])
+                      data.pop()
+                      data.push(
                         '作为【管理员】，我可以【管理关卡】，以便【学生能够有序完成指定任务】。'
                       )
                       setModify(false)
@@ -89,7 +99,10 @@ const ShitPoem: React.FC = () => {
                     type="text"
                     style={{ textAlign: 'left' }}
                     onClick={() => {
-                      setText('早期版本的功能补全和纠错')
+                      setText(['早期版本的功能补全和纠错'])
+                      data.pop()
+                      data.push('早期版本的功能补全和纠错')
+
                       setModify(false)
                     }}>
                     早期版本的功能补全和纠错

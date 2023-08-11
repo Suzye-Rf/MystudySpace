@@ -11,7 +11,7 @@ import React, { ReactEventHandler, useEffect, useState } from 'react'
 import './style.css'
 import { useListStore } from '../store/ListStore'
 import NewBlock from '../block/NewBlock'
-import Blocks from '../block/Block'
+import Blocks from '../block/block'
 import { blockStore } from '../store/BlockStore'
 import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
 

@@ -8,9 +8,10 @@ import { ListVisibilityProvider } from './store/ListVisibility'
 import { DashBoardStoreProvider } from './store/MainDashBoradStates'
 
 import { NewliststatsProvider } from './store/NewListListener'
+import { TagsStore } from './store/Tags'
+import { DataProvider } from './store/BlockData'
 
 const App = () => {
-  
   return (
     <>
       <DashBoardStoreProvider>
@@ -19,7 +20,11 @@ const App = () => {
             <NewliststatsProvider>
               <BlockStoreProvider>
                 <StoreListProvider>
-                  <Page />
+                  <DataProvider>
+                    <TagsStore>
+                      <Page />
+                    </TagsStore>
+                  </DataProvider>
                   {/* 这东西要是能少点就好了 应该有办法吧 */}
                 </StoreListProvider>
               </BlockStoreProvider>

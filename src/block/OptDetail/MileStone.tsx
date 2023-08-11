@@ -4,13 +4,16 @@ import {
   SearchOutlined,
 } from '@ant-design/icons'
 import { Button, Divider, Input, Popover } from 'antd'
-import { useRef, useState } from 'react'
+import {  useState } from 'react'
 import data from '../../data/Data.json'
+import { dataSource } from '../../store/BlockData'
 
-const Milestone: React.FC = () => {
+const Milestone: React.FC<{ id: number; data: string[] }> = (props) => {
+  const db = dataSource()
+  let dts = db.dataState.find((item) => item.id === props.id)?.data
+    .MileStone as string[]
   const [modify, setModify] = useState(false)
-  const [makeid, setMakeid] = useState('none')
-  const [edit, setEdit] = useState(false)
+  const [makeid, setMakeid] = useState(dts[0])
   return (
     <div>
       <div
@@ -33,7 +36,7 @@ const Milestone: React.FC = () => {
       </div>
       <div style={{ display: 'flex', flexFlow: 'column nowrap' }}>
         {!modify &&
-          (edit ? (
+          (dts[0] !=='none' ? (
             <span>{makeid}</span>
           ) : (
             <span style={{ color: 'gray' }}>无</span>
@@ -64,8 +67,9 @@ const Milestone: React.FC = () => {
                     }}
                     onClick={() => {
                       setMakeid('none')
-                      setEdit(false)
                       setModify(false)
+                      dts.pop()
+                      dts.push('none')
                     }}>
                     无 里程碑
                     <span>{makeid === 'none' && <CheckOutlined />}</span>
@@ -85,8 +89,10 @@ const Milestone: React.FC = () => {
                       onClick={() => {
                         {
                           setMakeid(item)
-                          setEdit(true)
+                          
                           setModify(false)
+                          dts.pop()
+                          dts.push(item)
                         }
                       }}>
                       {item}

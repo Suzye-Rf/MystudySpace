@@ -6,12 +6,14 @@ import {
 import { Button, Divider, Input, Popover } from 'antd'
 import { useState } from 'react'
 import data from '../../data/Data.json'
+import { dataSource } from '../../store/BlockData'
 
-const Iterator: React.FC = () => {
+const Iterator: React.FC<{ id: number; data: JSX.Element[] }> = (props) => {
+  const db = dataSource()
+  let dts: JSX.Element[] = db.dataState.find((item) => item.id === props.id)
+    ?.data.Iteration as JSX.Element[]
   const [modify, setModify] = useState(false)
-  const [content, setContent] = useState(
-    <span style={{ color: 'gray' }}>无</span>
-  )
+  const [content, setContent] = useState(dts[0])
   return (
     <div>
       <div
@@ -66,6 +68,8 @@ const Iterator: React.FC = () => {
                   onClick={() => {
                     setModify(false)
                     setContent(<span style={{ color: 'gray' }}>无</span>)
+                    dts.pop()
+                    dts.push(<span style={{ color: 'gray' }}>无</span>)
                   }}>
                   无迭代
                 </Button>
@@ -77,6 +81,8 @@ const Iterator: React.FC = () => {
                     key={item}
                     onClick={() => {
                       setContent(<span>{item}</span>)
+                      dts.pop()
+                      dts.push(<span>{item}</span>)
                       setModify(false)
                     }}>
                     {item}

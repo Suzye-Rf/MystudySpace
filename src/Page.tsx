@@ -12,13 +12,14 @@ import { blockStore } from './store/BlockStore'
 import { MouseEventHandler, useState } from 'react'
 import { event } from 'jquery'
 import { DragDropContext } from 'react-beautiful-dnd'
+import { dataSource } from './store/BlockData'
 
 const Page: React.FC = () => {
   const Vi = Listsvisibility()
   const newliststat = newliststats()
   const liststore = useListStore()
   const blockstore = blockStore()
-
+  const DB = dataSource()
   // Create Animation drag
   const onDragEnd = (result: any) => {
     const { destination, source,draggableId } = result
@@ -34,6 +35,7 @@ const Page: React.FC = () => {
       console.log(destination.droppableId, source.droppableId)
       blockstore.Swap(source.index, destination.index)
       console.log(blockstore.blockList)
+      
     } else {
       blockstore.Switch(
         parseInt(source.droppableId.charAt(source.droppableId.length - 1)),
@@ -44,6 +46,7 @@ const Page: React.FC = () => {
         destination.index,
         draggableId
       )
+      console.log(DB.dataState)
     }
   }
   const onDragStart = (result: any) => {

@@ -1,13 +1,17 @@
 import { Button, DatePicker, DatePickerProps } from 'antd'
 import { useState } from 'react'
+import { dataSource } from '../../store/BlockData'
 
-const DeadLine: React.FC = () => {
+const DeadLine: React.FC<{ id: number; data: string[] }> = (props) => {
+  const db = dataSource()
+  let dts: string[] = db.dataState.find((item) => item.id === props.id)?.data
+    .DeadLine as string[]
   const [modify, setModify] = useState(false)
-  const [checked, setChecked] = useState(false)
-  const [dateString, setDateString] = useState('')
+  const [dateString, setDateString] = useState(dts[0])
   const onChange: DatePickerProps['onChange'] = (_date, dateString) => {
-    setChecked(true)
     setDateString(dateString)
+    dts.pop()
+    dts.push(dateString)
     setModify(false)
   }
   return (
@@ -27,7 +31,6 @@ const DeadLine: React.FC = () => {
           onClick={() => {
             if (modify) {
               setModify(false)
-              setChecked(false)
             } else setModify(true)
           }}>
           编辑
@@ -36,7 +39,7 @@ const DeadLine: React.FC = () => {
       <div>
         {modify ? (
           <DatePicker onChange={onChange} placeholder="请选择日期" open />
-        ) : checked ? (
+        ) : dts[0] !== '无' ? (
           <span>{dateString}</span>
         ) : (
           <span style={{ color: 'gray' }}>无</span>
