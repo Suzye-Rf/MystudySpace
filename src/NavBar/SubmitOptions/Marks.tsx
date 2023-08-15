@@ -8,13 +8,11 @@ import { Button, Tag, Popover, Input, Checkbox } from 'antd'
 import { CheckboxValueType } from 'antd/es/checkbox/Group'
 import data from '../../data/Data.json'
 import { useEffect, useState } from 'react'
-import { currentdashboard } from '../../store/CurrentDashBorad'
 
-const Marks: React.FC<{ Mark: CheckboxValueType[][] }> = (prop) => {
-  const { current } = currentdashboard()
+const Marks: React.FC<{ Marks: CheckboxValueType[][] }> = (prop) => {
   const handleCheckBoxChange = (value: CheckboxValueType[]) => {
-    if (prop.Mark.length !== 0) prop.Mark.pop()
-    prop.Mark.push(value)
+    if (prop.Marks.length !== 0) prop.Marks.pop()
+    prop.Marks.push(value)
     setMarkList(value)
   }
 
@@ -26,8 +24,9 @@ const Marks: React.FC<{ Mark: CheckboxValueType[][] }> = (prop) => {
     ),
     [marklist, setMarkList] = useState<CheckboxValueType[]>([])
   useEffect(() => {
-    if (prop.Mark[0][0] !== '任何标记') setMarkList(prop.Mark[0])
-  }, [current])
+    if (prop.Marks.length !== 0) prop.Marks.pop()
+    prop.Marks.push(marklist)
+  }, [marklist])
   return (
     <div
       style={{
@@ -70,10 +69,6 @@ const Marks: React.FC<{ Mark: CheckboxValueType[][] }> = (prop) => {
                 size="small"
                 style={{ margin: 0 }}
                 onClick={() => {
-                  if (prop.Mark.length !== 0) prop.Mark.pop()
-                  prop.Mark.push(
-                    marklist.filter((i) => String(i) !== String(item))
-                  )
                   setMarkList(
                     marklist.filter((i) => String(i) !== String(item))
                   )

@@ -1,19 +1,14 @@
 import { SearchOutlined, DownOutlined } from '@ant-design/icons'
 import { Button, Popover, Input, Divider } from 'antd'
 import data from '../../data/Data.json'
-import { useEffect, useState } from 'react'
-import { currentdashboard } from '../../store/CurrentDashBorad'
+import { useState } from 'react'
 
-const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
+const MileStone: React.FC<{ Milestone: string[] }> = (prop) => {
   //里程碑状态
-  const { current } = currentdashboard()
   const [MileStone, makeMilestone] = useState(false),
     [MileStoneText, makeMilestonet] = useState(
       <p style={{ color: 'gray', margin: 2 }}>不过滤里程碑</p>
     )
-  useEffect(() => {
-    makeMilestonet(<p style={{ margin: 2 }}>{prop.MileStone[0] as string}</p>)
-  }, [current])
   return (
     <div
       style={{
@@ -51,12 +46,12 @@ const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
               <Input prefix={<SearchOutlined />} placeholder="搜索里程碑" />
               <Button
                 onClick={() => {
-                  if (prop.MileStone.length !== 0) prop.MileStone.pop()
-                  prop.MileStone.push('不过滤里程碑')
                   makeMilestonet(
                     <p style={{ color: 'gray', margin: 2 }}>不过滤里程碑</p>
                   )
                   makeMilestone(false)
+                  if (prop.Milestone.length !== 0) prop.Milestone.pop()
+                  prop.Milestone.push('不过滤里程碑')
                 }}
                 type="text"
                 style={{ textAlign: 'left' }}>
@@ -64,12 +59,12 @@ const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
               </Button>
               <Button
                 onClick={() => {
-                  if (prop.MileStone.length !== 0) prop.MileStone.pop()
-                  prop.MileStone.push('任何里程碑')
                   makeMilestonet(
                     <strong style={{ margin: 2 }}>任何里程碑</strong>
                   )
                   makeMilestone(false)
+                  if (prop.Milestone.length !== 0) prop.Milestone.pop()
+                  prop.Milestone.push('任何里程碑')
                 }}
                 type="text"
                 style={{ textAlign: 'left' }}>
@@ -77,12 +72,12 @@ const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
               </Button>
               <Button
                 onClick={() => {
-                  if (prop.MileStone.length !== 0) prop.MileStone.pop()
-                  prop.MileStone.push('无里程碑')
                   makeMilestonet(
                     <strong style={{ margin: 2 }}>无里程碑</strong>
                   )
                   makeMilestone(false)
+                  if (prop.Milestone.length !== 0) prop.Milestone.pop()
+                  prop.Milestone.push('无里程碑')
                 }}
                 type="text"
                 style={{ textAlign: 'left' }}>
@@ -90,12 +85,12 @@ const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
               </Button>
               <Button
                 onClick={() => {
-                  if (prop.MileStone.length !== 0) prop.MileStone.pop()
-                  prop.MileStone.push('即将到来')
                   makeMilestonet(
                     <strong style={{ margin: 2 }}>即将到来</strong>
                   )
                   makeMilestone(false)
+                  if (prop.Milestone.length !== 0) prop.Milestone.pop()
+                  prop.Milestone.push('即将到来')
                 }}
                 type="text"
                 style={{ textAlign: 'left' }}>
@@ -103,10 +98,10 @@ const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
               </Button>
               <Button
                 onClick={() => {
-                  if (prop.MileStone.length !== 0) prop.MileStone.pop()
-                  prop.MileStone.push('已开始')
                   makeMilestonet(<strong style={{ margin: 2 }}>已开始</strong>)
                   makeMilestone(false)
+                  if (prop.Milestone.length !== 0) prop.Milestone.pop()
+                  prop.Milestone.push('已开始')
                 }}
                 type="text"
                 style={{ textAlign: 'left' }}>
@@ -119,10 +114,10 @@ const MileStone: React.FC<{ MileStone: string[] }> = (prop) => {
                   key={items}
                   style={{ textAlign: 'left' }}
                   onClick={() => {
-                    if (prop.MileStone.length !== 0) prop.MileStone.pop()
-                    prop.MileStone.push(items)
                     makeMilestonet(<strong>{items}</strong>)
                     makeMilestone(false)
+                    if (prop.Milestone.length !== 0) prop.Milestone.pop()
+                    prop.Milestone.push(items)
                   }}>
                   {items}
                 </Button>

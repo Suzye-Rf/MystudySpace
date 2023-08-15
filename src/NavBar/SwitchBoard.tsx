@@ -1,21 +1,39 @@
 import { DownOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button, Divider, Input, Modal, Popover } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usedDashBoardStore } from '../store/MainDashBoradStates'
 import { currentdashboard } from '../store/CurrentDashBorad'
 import NewBoard from './NewDashBoard'
+import { Listsvisibility } from '../store/ListVisibility'
+import { fuckingStore } from '../store/Dashboards'
 // ----------------------------------------------------------------
 const SwitchBoard: React.FC = () => {
   const { DashBoards } = usedDashBoardStore()
   const { Update, current } = currentdashboard()
   const [searchtext, setSearchText] = useState('')
-  
+
+  const ListOption = Listsvisibility()
+  const dash = fuckingStore()
   const handleButtonClick = (key: string) => {
-    console.log(key)
     Update(key)
-    // TODO: Handle button clicks here instead of using the default implementation.
   }
-  
+  useEffect(() => {
+    console.log(current,dash.DashBoards)
+    ListOption.letOpeningUnvisible(
+      (dash.DashBoards.find((item) => item.Name[0] === current)
+        ?.ShowOpen[0] as boolean)
+        ? 'block'
+        : 'none'
+    )
+    ListOption.letClosedUnvisible(
+      (dash.DashBoards.find((item) => item.Name[0] === current)
+        ?.ShowClose[0] as boolean)
+        ? 'block'
+        : 'none'
+    )
+    ListOption.UpdateKey()
+  },[current])
+
   return (
     <>
       <span className="AddDashBoard" style={{ flexGrow: 1, margin: '0 5px' }}>
@@ -44,7 +62,7 @@ const SwitchBoard: React.FC = () => {
                   setSearchText(e.target.value)
                 }}
               />
-              
+
               {DashBoards.map((dashboard) => (
                 <Button
                   type="text"
@@ -73,7 +91,6 @@ const SwitchBoard: React.FC = () => {
             </span>
           </Button>
         </Popover>
-        
       </span>
     </>
   )

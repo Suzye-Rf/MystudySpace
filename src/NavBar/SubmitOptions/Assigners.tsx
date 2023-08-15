@@ -1,20 +1,15 @@
 import { SearchOutlined, UserOutlined, DownOutlined } from '@ant-design/icons'
 import { Button, Popover, Input, Divider, Avatar } from 'antd'
 import data from '../../data/Data.json'
-import { useEffect, useState } from 'react'
-import { currentdashboard } from '../../store/CurrentDashBorad'
+import { useState } from 'react'
+import { fuckingStore } from '../../store/Dashboards'
 
 const Assigners: React.FC<{ Assigner: JSX.Element[] }> = (prop) => {
-  const { current } = currentdashboard()
   //指派人状态
   const [Assigner, makeAssigner] = useState(false),
     [AssignerT, makeAssignerT] = useState(
       <p style={{ color: 'gray', margin: 2 }}>任何指派人</p>
     )
-  useEffect(() => {
-    makeAssignerT(prop.Assigner[0])
-  }, [current])
-
   return (
     <div
       style={{
@@ -50,14 +45,14 @@ const Assigners: React.FC<{ Assigner: JSX.Element[] }> = (prop) => {
               <Button
                 type="text"
                 onClick={() => {
-                  if (prop.Assigner.length !== 0) prop.Assigner.pop()
-                  prop.Assigner.push(
-                    <p style={{ margin: 2, color: 'gray' }}>任何指派人</p>
-                  )
                   makeAssignerT(
                     <p style={{ margin: 2, color: 'gray' }}>任何指派人</p>
                   )
                   makeAssigner(false)
+                  if (prop.Assigner.length !== 0) prop.Assigner.pop()
+                  prop.Assigner.push(
+                    <p style={{ margin: 2, color: 'gray' }}>任何指派人</p>
+                  )
                 }}>
                 任何指派人
               </Button>
@@ -72,29 +67,8 @@ const Assigners: React.FC<{ Assigner: JSX.Element[] }> = (prop) => {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                   }}
+                  key={items.Name}
                   onClick={() => {
-                    if (prop.Assigner.length !== 0) prop.Assigner.pop()
-                    prop.Assigner.push(
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexFlow: 'row nowrap',
-                          justifyContent: 'flex-start',
-                          alignItems: 'center',
-                        }}>
-                        <Avatar icon={<UserOutlined />} />
-                        <span
-                          style={{
-                            display: 'flex',
-                            flexFlow: 'column nowrap',
-                            justifyContent: 'center',
-                            margin: '0 5px',
-                          }}>
-                          <div style={{ fontSize: 15 }}>{items.Name}</div>
-                          <div style={{ fontSize: 10 }}>{items.account}</div>
-                        </span>
-                      </div>
-                    )
                     makeAssignerT(
                       <div
                         style={{
@@ -117,6 +91,28 @@ const Assigners: React.FC<{ Assigner: JSX.Element[] }> = (prop) => {
                       </div>
                     )
                     makeAssigner(false)
+                    if (prop.Assigner.length !== 0) prop.Assigner.pop()
+                    prop.Assigner.push(
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexFlow: 'row nowrap',
+                          justifyContent: 'flex-start',
+                          alignItems: 'center',
+                        }}>
+                        <Avatar icon={<UserOutlined />} />
+                        <span
+                          style={{
+                            display: 'flex',
+                            flexFlow: 'column nowrap',
+                            justifyContent: 'center',
+                            margin: '0 5px',
+                          }}>
+                          <div style={{ fontSize: 15 }}>{items.Name}</div>
+                          <div style={{ fontSize: 10 }}>{items.account}</div>
+                        </span>
+                      </div>
+                    )
                   }}>
                   <Avatar icon={<UserOutlined />} />
                   <span

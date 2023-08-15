@@ -5,20 +5,14 @@ import {
 } from '@ant-design/icons'
 import { Button, Popover, Input, Divider } from 'antd'
 import data from '../../data/Data.json'
-import { useEffect, useState } from 'react'
-import { currentdashboard } from '../../store/CurrentDashBorad'
+import { useState } from 'react'
 
 const Iterations: React.FC<{ Iteration: JSX.Element[] }> = (prop) => {
   //迭代状态
-  const { current } = currentdashboard()
-
   const [Iterations, makeIterations] = useState(false),
     [iterationsText, makeIterationsT] = useState(
       <p style={{ color: 'gray', margin: 2 }}>任何迭代</p>
     )
-  useEffect(() => {
-    makeIterationsT(prop.Iteration[0])
-  }, [current])
   return (
     <div
       style={{
@@ -56,14 +50,14 @@ const Iterations: React.FC<{ Iteration: JSX.Element[] }> = (prop) => {
                 <Input prefix={<SearchOutlined />} placeholder="搜索迭代" />
                 <Button
                   onClick={() => {
-                    if (prop.Iteration.length !== 0) prop.Iteration.pop()
-                    prop.Iteration.push(
-                      <p style={{ color: 'gray', margin: 2 }}>任何迭代</p>
-                    )
                     makeIterationsT(
                       <p style={{ color: 'gray', margin: 2 }}>任何迭代</p>
                     )
                     makeIterations(false)
+                    if (prop.Iteration.length !== 0) prop.Iteration.pop()
+                    prop.Iteration.push(
+                      <p style={{ color: 'gray', margin: 2 }}>任何迭代</p>
+                    )
                   }}
                   type="text"
                   style={{ textAlign: 'left' }}>
@@ -71,14 +65,12 @@ const Iterations: React.FC<{ Iteration: JSX.Element[] }> = (prop) => {
                 </Button>
                 <Button
                   onClick={() => {
-                    if (prop.Iteration.length !== 0) prop.Iteration.pop()
-                    prop.Iteration.push(
-                      <strong style={{ margin: 2 }}>无迭代</strong>
-                    )
                     makeIterationsT(
                       <strong style={{ margin: 2 }}>无迭代</strong>
                     )
                     makeIterations(false)
+                    if (prop.Iteration.length !== 0) prop.Iteration.pop()
+                    prop.Iteration.push(<p style={{ margin: 2 }}>无迭代</p>)
                   }}
                   type="text"
                   style={{ textAlign: 'left' }}>
@@ -86,14 +78,12 @@ const Iterations: React.FC<{ Iteration: JSX.Element[] }> = (prop) => {
                 </Button>
                 <Button
                   onClick={() => {
-                    if (prop.Iteration.length !== 0) prop.Iteration.pop()
-                    prop.Iteration.push(
-                      <strong style={{ margin: 2 }}>当前迭代</strong>
-                    )
                     makeIterationsT(
                       <strong style={{ margin: 2 }}>当前迭代</strong>
                     )
                     makeIterations(false)
+                    if (prop.Iteration.length !== 0) prop.Iteration.pop()
+                    prop.Iteration.push(<p style={{ margin: 2 }}>当前迭代</p>)
                   }}
                   type="text"
                   style={{ textAlign: 'left' }}>
@@ -118,12 +108,10 @@ const Iterations: React.FC<{ Iteration: JSX.Element[] }> = (prop) => {
                     key={items}
                     style={{ textAlign: 'left' }}
                     onClick={() => {
-                      if (prop.Iteration.length !== 0) prop.Iteration.pop()
-                    prop.Iteration.push(
-                      <strong style={{ margin: 2 }}>{items}</strong>
-                    )
                       makeIterationsT(<strong>{items}</strong>)
                       makeIterations(false)
+                      if (prop.Iteration.length !== 0) prop.Iteration.pop()
+                      prop.Iteration.push(<strong>{items}</strong>)
                     }}>
                     {items}
                   </Button>
@@ -150,7 +138,6 @@ const Iterations: React.FC<{ Iteration: JSX.Element[] }> = (prop) => {
           </Popover>
         </>
       )}
-      {/*TODO: There's a state here,Need 2 be edited*/}
     </div>
   )
 }

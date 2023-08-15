@@ -1,20 +1,17 @@
 import { Button, Checkbox, Form, Input, Modal } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { currentdashboard } from '../store/CurrentDashBorad'
 import { CheckboxChangeEvent } from 'antd/es/checkbox'
 import { Listsvisibility } from '../store/ListVisibility'
-import MileStone from './Forms/MileStone'
-import Iterations from './Forms/Iterations'
-import Marks from './Forms/Marks'
-import Assigners from './Forms/Assigners'
-import Weight from './Forms/Weight'
-import { useForm } from 'antd/es/form/Form'
-import OptForm from './Form'
+import OptForm from './OptForm'
+import { fuckingStore } from '../store/Dashboards'
+import { CheckboxValueType } from 'antd/es/checkbox/Group'
 
 const style = { margin: '2px' }
 const Edit: React.FC = () => {
+  const dash = fuckingStore() // 这个是全局的    所有看板的     全部数据
   const ListOption = Listsvisibility()
-  const Curr = currentdashboard()
+  const Curr = currentdashboard() // 全局的  当前   的状态
   const [showState, setShowState] = useState(false)
   const [thisDashboardName, setThisDashboardName] = useState('')
   const [editable, setEditable] = useState(false)
@@ -25,6 +22,14 @@ const Edit: React.FC = () => {
   const handleButtonClick = () => {
     setShowState(true)
     setThisDashboardName(Curr.current)
+    setCheckOpening(
+      dash.DashBoards.find((item) => item.Name[0] === Curr.current)
+        ?.ShowOpen[0] as boolean
+    )
+    setCheckClose(
+      dash.DashBoards.find((item) => item.Name[0] === Curr.current)
+        ?.ShowClose[0] as boolean
+    )
   }
 
   const handleCancelButtonClick = () => {
@@ -38,7 +43,6 @@ const Edit: React.FC = () => {
       setShowState(false)
     }, 800)
   }
-  
 
   return (
     <>
@@ -77,11 +81,25 @@ const Edit: React.FC = () => {
           <Checkbox
             checked={checkOpening}
             onChange={(e: CheckboxChangeEvent) => {
+              if (
+                dash.DashBoards.find((item) => item.Name[0] === Curr.current)
+                  ?.ShowOpen.length !== 0
+              ) {
+                dash.DashBoards.find(
+                  (item) => item.Name[0] === Curr.current
+                )?.ShowOpen.pop()
+              }
               if (e.target.checked) {
                 ListOption.letOpeningUnvisible('block')
+                dash.DashBoards.find(
+                  (item) => item.Name[0] === Curr.current
+                )?.ShowOpen.push(true)
                 setCheckOpening(true)
               } else {
                 ListOption.letOpeningUnvisible('none')
+                dash.DashBoards.find(
+                  (item) => item.Name[0] === Curr.current
+                )?.ShowOpen.push(false)
                 setCheckOpening(false)
               }
             }}>
@@ -91,11 +109,25 @@ const Edit: React.FC = () => {
           <Checkbox
             checked={checkClose}
             onChange={(e: CheckboxChangeEvent) => {
+              if (
+                dash.DashBoards.find((item) => item.Name[0] === Curr.current)
+                  ?.ShowClose.length !== 0
+              ) {
+                dash.DashBoards.find(
+                  (item) => item.Name[0] === Curr.current
+                )?.ShowClose.pop()
+              }
               if (e.target.checked) {
                 ListOption.letClosedUnvisible('block')
+                dash.DashBoards.find(
+                  (item) => item.Name[0] === Curr.current
+                )?.ShowClose.push(true)
                 setCheckClose(true)
               } else {
                 ListOption.letClosedUnvisible('none')
+                dash.DashBoards.find(
+                  (item) => item.Name[0] === Curr.current
+                )?.ShowClose.push(false)
                 setCheckClose(false)
               }
             }}>
@@ -105,9 +137,18 @@ const Edit: React.FC = () => {
         <div>
           <h3 style={{ margin: '10px 0' }}>范围</h3>
           <p style={{ color: 'gray' }}>看板范围会影响看板访问者可见的议题</p>
-            <Form name='editForm' method='POST'>
-              <OptForm />
-            </Form>
+          <Form name="editForm" method="POST">
+            <OptForm
+              {...(dash.DashBoards.find((item) => item.Name[0] === Curr.current)
+                ?.props as {
+                Milestone: string[]
+                Assigner: JSX.Element[]
+                Iteration: JSX.Element[]
+                Marks: CheckboxValueType[][]
+                Weight: JSX.Element[]
+              })}
+            />
+          </Form>
         </div>
       </Modal>
     </>

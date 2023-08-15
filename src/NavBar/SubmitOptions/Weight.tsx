@@ -1,19 +1,14 @@
 import { DownOutlined } from '@ant-design/icons'
 import { Button, Popover } from 'antd'
 import data from '../../data/Data.json'
-import { useEffect, useState } from 'react'
-import { currentdashboard } from '../../store/CurrentDashBorad'
+import { useState } from 'react'
 
 const Weight: React.FC<{ Weight: JSX.Element[] }> = (prop) => {
-  const { current } = currentdashboard()
   //权重状态
   const [Weight, makeWeight] = useState(false),
     [WeightT, makeWeightT] = useState(
       <p style={{ color: 'gray', margin: 2 }}>Any weight</p>
     )
-  useEffect(() => {
-    makeWeightT(prop.Weight[0])
-  }, [current])
   return (
     <div
       style={{
@@ -56,15 +51,16 @@ const Weight: React.FC<{ Weight: JSX.Element[] }> = (prop) => {
                 <Button
                   type="text"
                   style={{ textAlign: 'left' }}
+                  key={item}
                   onClick={() => {
-                    if (prop.Weight.length !== 0) prop.Weight.pop()
-                    prop.Weight.push(
-                      <p style={{ color: 'gray', margin: 2 }}>{item}</p>
-                    )
                     makeWeightT(
                       <p style={{ color: 'gray', margin: 2 }}>{item}</p>
                     )
                     makeWeight(false)
+                    if (prop.Weight.length !== 0) prop.Weight.pop()
+                    prop.Weight.push(
+                      <p style={{ color: 'gray', margin: 2 }}>{item}</p>
+                    )
                   }}>
                   {item}
                 </Button>

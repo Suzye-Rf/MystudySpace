@@ -12,7 +12,6 @@ import { DownOutlined } from '@ant-design/icons'
 import { newliststats } from '../store/NewListListener'
 import { content } from '../data/data'
 import { useListStore } from '../store/ListStore'
-import { blockStore } from '../store/BlockStore'
 const { Search } = Input
 
 const NewList: React.FC<{ visibility: string }> = (props) => {
