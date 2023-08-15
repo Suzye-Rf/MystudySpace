@@ -2,8 +2,7 @@ import { createStore } from 'hox'
 import { useState } from 'react'
 
 export const [usedDashBoardStore, DashBoardStoreProvider] = createStore(() => {
-  const [DashBoards, setDashBoards] = useState([{title:'Development',key:'development'},{title:'Edited',key:'edited'}])
-
+  const [DashBoards, setDashBoards] = useState([{title:'Development',key:'development'}])
   const addDashBoard = (DashBoard:{title:string,key:string} ) => {
     setDashBoards((shit) => [...shit, DashBoard])
   }
