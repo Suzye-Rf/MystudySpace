@@ -12,9 +12,11 @@ import { DownOutlined } from '@ant-design/icons'
 import { newliststats } from '../store/NewListListener'
 import { content } from '../data/data'
 import { useListStore } from '../store/ListStore'
+import { currentdashboard } from '../store/CurrentDashBorad'
 const { Search } = Input
 
 const NewList: React.FC<{ visibility: string }> = (props) => {
+  const {current} = currentdashboard()
   const boxstyle = {
     // default boxstyle
     width: '400px',
@@ -94,6 +96,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
   const [loading, setLoading] = useState(false)
 
   const commit = (prop: {
+    dash:string
     selfid:number
     belongsTo: number
     title: string
@@ -123,6 +126,7 @@ const NewList: React.FC<{ visibility: string }> = (props) => {
 
         //这里写提交的函数，参数为数据数组的value
         commit({
+          dash:current,
           selfid:liststore.lists.length + 2,
           belongsTo: liststore.lists.length + 2,
           title: content[value - 1].cont[lowerVal - 1].content,

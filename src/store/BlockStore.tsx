@@ -3,19 +3,18 @@ import { useEffect, useState } from 'react'
 
 export const [blockStore, BlockStoreProvider] = createStore(() => {
   const [blockList, setBlockList] = useState<
-    { name: string; id: number; belongsto: number }[]
+    { dash: string; name: string; id: number; belongsto: number }[]
   >([])
 
-  const Edit = (identification:number, Name:string) => {
-    let index = blockList.findIndex(item => item.id === identification)
+  const Edit = (identification: number, Name: string) => {
+    let index = blockList.findIndex((item) => item.id === identification)
     let belong = blockList[index].belongsto
+    let dash = blockList[index].dash
     let temp = blockList
-    temp.splice(index,1,{ name: Name, id: identification, belongsto: belong })
-    
-    
+    temp.splice(index, 1, { dash:dash, name: Name, id: identification, belongsto: belong })
   }
 
-  const Addlist = (thing: { name: string; id: number; belongsto: number }) => {
+  const Addlist = (thing: { dash:string, name: string; id: number; belongsto: number }) => {
     setBlockList([...blockList, thing])
   }
   const Delete = (name: string) => {
@@ -49,8 +48,24 @@ export const [blockStore, BlockStoreProvider] = createStore(() => {
     // templist.splice(temp2index, 1, temp)
     setBlockList(templist)
   }
-  const Switch = (sourceID:number,destinationID:number,indexS:number,indexD:number,nameofDrag:String) =>{
-    console.log('来自List',sourceID,'的第',indexS,'个元素,需要转移到List',destinationID,'的第',indexD,'个位置上')
+  const Switch = (
+    sourceID: number,
+    destinationID: number,
+    indexS: number,
+    indexD: number,
+    nameofDrag: String
+  ) => {
+    console.log(
+      '来自List',
+      sourceID,
+      '的第',
+      indexS,
+      '个元素,需要转移到List',
+      destinationID,
+      '的第',
+      indexD,
+      '个位置上'
+    )
     console.log('你执行了吗？')
     let templist = blockList
     let temp1 = templist.filter((item) => item.name === nameofDrag)[0]
@@ -58,9 +73,9 @@ export const [blockStore, BlockStoreProvider] = createStore(() => {
     let templ = templist.filter((item) => item.belongsto === destinationID)
     templist = templist.filter((item) => item.belongsto !== destinationID)
     temp1.belongsto = destinationID
-    templ.splice(indexD,0,temp1)
+    templ.splice(indexD, 0, temp1)
     templist = templist.concat(templ)
-    console.log('完成。',templist)
+    console.log('完成。', templist)
     setBlockList(templist)
   }
 
@@ -70,6 +85,6 @@ export const [blockStore, BlockStoreProvider] = createStore(() => {
     Delete,
     Swap,
     Switch,
-    Edit
+    Edit,
   }
 })

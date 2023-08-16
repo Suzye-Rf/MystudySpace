@@ -13,8 +13,10 @@ import { MouseEventHandler, useState } from 'react'
 import { event } from 'jquery'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { dataSource } from './store/BlockData'
+import { currentdashboard } from './store/CurrentDashBorad'
 
 const Page: React.FC = () => {
+  const { current } = currentdashboard()
   const Vi = Listsvisibility()
   const newliststat = newliststats()
   const liststore = useListStore()
@@ -22,7 +24,7 @@ const Page: React.FC = () => {
   const DB = dataSource()
   // Create Animation drag
   const onDragEnd = (result: any) => {
-    const { destination, source,draggableId } = result
+    const { destination, source, draggableId } = result
     if (!destination) return
     if (
       destination.droppableId === source.droppableId &&
@@ -35,7 +37,6 @@ const Page: React.FC = () => {
       console.log(destination.droppableId, source.droppableId)
       blockstore.Swap(source.index, destination.index)
       console.log(blockstore.blockList)
-      
     } else {
       blockstore.Switch(
         parseInt(source.droppableId.charAt(source.droppableId.length - 1)),
@@ -88,13 +89,14 @@ const Page: React.FC = () => {
               }}>
               <List
                 {...{
+                  dash: current,
                   selfid: 1,
                   belongsTo: 1,
                   title: '开放中',
                   form: '',
                   tag: <></>,
                   data1: blockstore.blockList.filter(
-                    (items) => items.belongsto === 1
+                    (items) => items.belongsto === 1 && items.dash === current
                   ).length,
                   data2: 0,
                   plusActivated: true,
@@ -104,23 +106,26 @@ const Page: React.FC = () => {
                 key={Vi.key}
                 ICanDrag={false}
               />
-              
+
               {liststore.lists.map((item) => {
                 return (
-                  <div key={item.belongsTo}>
-                    <List {...item} ICanDrag />
-                  </div>
+                  item.dash === current && (
+                    <div key={item.belongsTo}>
+                      <List {...item} ICanDrag />
+                    </div>
+                  )
                 )
               })}
               <List
                 {...{
+                  dash: current,
                   selfid: 0,
                   belongsTo: 0,
                   title: 'Closed',
                   form: '',
                   tag: <></>,
                   data1: blockstore.blockList.filter(
-                    (items) => items.id !== 0 && items.belongsto === 0
+                    (items) => items.id !== 0 && items.belongsto === 0 && items.dash === current
                   ).length,
                   data2: 0,
                   plusActivated: false,

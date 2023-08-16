@@ -7,6 +7,7 @@ import { Tags } from '../store/Tags'
 import data from '../data/Data.json'
 import { dataSource } from '../store/BlockData'
 const Blocks: React.FC<{
+  dash:string,
   name: string
   id: number
   belongsto: number

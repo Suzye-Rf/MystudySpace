@@ -7,15 +7,17 @@ import {
   UpOutlined,
 } from '@ant-design/icons'
 import { Button, Divider, Drawer, Modal, Space, Spin, Tooltip } from 'antd'
-import React, { ReactEventHandler, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import { useListStore } from '../store/ListStore'
 import NewBlock from '../block/NewBlock'
 import Blocks from '../block/block'
 import { blockStore } from '../store/BlockStore'
-import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { Droppable } from 'react-beautiful-dnd'
+import { currentdashboard } from '../store/CurrentDashBorad'
 
 const List: React.FC<{
+  dash: string
   selfid: number
   belongsTo: number
   title: string
@@ -28,6 +30,7 @@ const List: React.FC<{
   Display: string
   ICanDrag: boolean
 }> = (props) => {
+  const { current } = currentdashboard()
   const boxstyle = {
     // default boxstyle
     width: '400px',
@@ -66,12 +69,12 @@ const List: React.FC<{
   const [loading, setLoading] = useState(false) // Set loading
   const [showmodal, setShowModal] = useState(false) // Set modal to show
   const [data, setData] = useState(
-    blockstore.blockList.filter((item) => item.belongsto === props.belongsTo)
+    blockstore.blockList.filter((item) => item.belongsto === props.belongsTo && item.dash === current)
       .length
   )
   useEffect(() => {
     setData(
-      blockstore.blockList.filter((item) => item.belongsto === props.belongsTo)
+      blockstore.blockList.filter((item) => item.belongsto === props.belongsTo && item.dash === current)
         .length
     )
   }, [blockstore.blockList])
@@ -260,7 +263,7 @@ const List: React.FC<{
               </span>
             </span>
 
-            <Droppable droppableId={'container' + props.belongsTo} >
+            <Droppable droppableId={'container' + props.belongsTo}>
               {(provided, snapshot) => (
                 <div
                   className="content"
@@ -272,10 +275,11 @@ const List: React.FC<{
                       : '#ECECEF',
                   }}
                   key={props.belongsTo}>
-                  <div style={{height:10}}></div>
+                  <div style={{ height: 10 }}></div>
                   {blockstore.blockList.map(
                     (items, index) =>
-                      items.belongsto === props.belongsTo && (
+                      items.belongsto === props.belongsTo &&
+                      items.dash === current && (
                         <Blocks
                           {...items}
                           index={index}

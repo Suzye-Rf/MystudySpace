@@ -4,6 +4,7 @@ import { useState } from "react";
 export const [useListStore, StoreListProvider] = createStore(()=>{
   
   const [lists,setLists] = useState<{
+    dash:string,
     selfid:number
     belongsTo: number,
     title: string,
@@ -15,6 +16,7 @@ export const [useListStore, StoreListProvider] = createStore(()=>{
     optionActivated: boolean,
     Display:string
   }[]>(new Array<{
+    dash:string,
     selfid:number,
     belongsTo: number,
     title: string,
@@ -28,6 +30,7 @@ export const [useListStore, StoreListProvider] = createStore(()=>{
   }>())
 
   const AddThing = (thing:{
+    dash:string,
     selfid:number
     belongsTo: number,
     title: string,

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { blockStore } from '../store/BlockStore'
 import { Tags } from '../store/Tags'
 import { dataSource } from '../store/BlockData'
+import { currentdashboard } from '../store/CurrentDashBorad'
 
 const NewBlock: React.FC<{
   belongsTo: number
@@ -13,6 +14,7 @@ const NewBlock: React.FC<{
     setshow: React.Dispatch<React.SetStateAction<boolean>>
   }
 }> = (props) => {
+  const { current } = currentdashboard()
   //引用tags
   const tag = Tags()
   const DB = dataSource()
@@ -39,6 +41,7 @@ const NewBlock: React.FC<{
     ])
     //这里提交新建议题
     block.Addlist({
+      dash: current,
       name: value,
       id: block.blockList.length + 1,
       belongsto: props.belongsTo,
